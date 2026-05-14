@@ -1,6 +1,11 @@
-import os
-from langchain.agents import create_anthropic_agent
-from langchain.chat_models import ChatAnthropic
-from langchain_core.tools import Tool
+# Agent AI that creates Canvas Class about Human-Computer Interaction (HCI) using LangChain and Anthropic's Claude API. The agent will use the FastMCP server to create a Canvas Class with the specified parameters.
+from dotenv import load_dotenv
+
+from langchain.agents import create_agent
+from langchain_anthropic import ChatAnthropic
+from langchain.tools import Tool
 
 from mcp.server.fastmcp import FastMCP
+
+# Get .env variables
+load_dotenv()
