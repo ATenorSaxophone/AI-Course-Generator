@@ -46,6 +46,10 @@ Create the eighth lesson module "HTML, CCSS, and GitHub." The students will lear
 The students will also have a coding lab that requires them to follow instructions that would cause them to create a previously planned out website page (e.g., create a button that aligns to the right side of the page).
 
 # Lesson 9: JavaScript
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with claude's agentic AI. Please only respond in text:
+Create the ninth lesson module "JavaScript." The students will learn what JavaScript is and how to set up it, how JavaScript is connected to HTML and CSS, and examples of functions that run with HTML and CSS. The students will take a 10 multiple choice question quiz about this lesson. The students will also include a coding lab that requires the students to follow a set of instructions that will provide functionality to a website using JavaScript.
+
 # Lesson 10: Usability Testing
 # Lesson 11: Dynamic DOM, API Calls, and servers with Node.js and Express.js
 # Lesson 12: Local Storage and Database Basics
