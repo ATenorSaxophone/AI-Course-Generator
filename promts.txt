@@ -29,11 +29,11 @@ Create the sixth lesson module "Figma/High-Fidelity Prototype." The students wil
 
 # Lesson 7: User Research Part 2
 # Lesson 8: HTML, CSS, and Github
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
-# Lesson 1: What is HCI?
+# Lesson 9: JavaScript
+# Lesson 10: Usability Testing
+# Lesson 11: Dynamic DOM, API Calls, and servers with Node.js and Express.js
+# Lesson 12: Local Storage and Database Basics
+# Lesson 13: Responsive/Mobile Design and PWAs
+# Lesson 14: Accessibility annd Inclusive Design
+# Lesson 15: Final presentation
+# Lesson 16: Finals Week (Final Exam)
