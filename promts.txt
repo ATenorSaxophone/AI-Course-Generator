@@ -28,6 +28,10 @@ This is a test from prompting with claude's agentic AI. Please only respond in t
 Create the sixth lesson module "Figma/High-Fidelity Prototype." The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components. The students will take a 10 multiple choice question quiz based on the lesson. The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype.
 
 # Lesson 7: User Research Part 2
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with claude's agentic AI. Please only respond in text:
+Create the seventh lesson module: "User Research Part 2." Students will learn what user journeys and personas are, as well as other techniques that have not been included in this prompt: https://chatgpt.com/share/6a0751cf-41a4-83ea-aa63-3f0699d6880b. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique.
+
 # Lesson 8: HTML, CSS, and Github
 # Lesson 9: JavaScript
 # Lesson 10: Usability Testing
