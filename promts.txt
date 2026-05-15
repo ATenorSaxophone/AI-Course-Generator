@@ -33,6 +33,18 @@ This is a test from prompting with claude's agentic AI. Please only respond in t
 Create the seventh lesson module: "User Research Part 2." Students will learn what user journeys and personas are, as well as other techniques that have not been included in this prompt: https://chatgpt.com/share/6a0751cf-41a4-83ea-aa63-3f0699d6880b. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique.
 
 # Lesson 8: HTML, CSS, and Github
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with claude's agentic AI. Please only respond in text:
+Create the eighth lesson module "HTML, CCSS, and GitHub." The students will learn What CSS is and what is stands for, what HTML is and what it stands for, how to set up HTML and CSS files, and basic HTML elements and CSS properties that could regularly be used when creating a website. Students will also learn how to use GitHub so they are able to better collaborate better across devices. The students will take a midterm that that will consist of 50 multiple choice questions that include information from this current lesson, as well as questions from these previous lessons:
+[Canvas Link 1]
+[Canvas Link 2]
+[Canvas Link 3]
+[Canvas Link 4]
+[Canvas Link 5]
+[Canvas Link 6]
+[Canvas Link 7]
+The students will also have a coding lab that requires them to follow instructions that would cause them to create a previously planned out website page (e.g., create a button that aligns to the right side of the page).
+
 # Lesson 9: JavaScript
 # Lesson 10: Usability Testing
 # Lesson 11: Dynamic DOM, API Calls, and servers with Node.js and Express.js
