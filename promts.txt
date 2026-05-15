@@ -1,27 +1,32 @@
 # Lesson 1: What is HCI?
+(This first line is because I used Claude.ai and not DeepSeek)
 "Create the first lesson module called "What is HCI?" that contains pages that teach students about "The definition of Human-Computer Interaction" and "what HCI includes in day-to-day activities (e.g., human psychology and cognition in relation to technology)." The module will also include 1 quiz that contains 10 multiple choice questions. Lastly, the module will also include a assignment that calls for the students to fill out a syllabus agreement survey and direct them to join a group for the group presentation and project assignment due at the end of the semester."
 
 # Lesson 2: Psychology Applied in HCI
-(This first line was because I used ChatGPT and not Claude.ai)
+(This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
 "Create the second lesson module "Psychology Applied in HCI." Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines and the Gestalt Principles. The students will take a 10 multiple choice question quiz. The students will also have an assignment called "Determining Gestalt Principles" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is."
 
 # Lesson 3: UI/UX Design
-(This first line was because I used ChatGPT and not Claude.ai)
+(This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
 Create the third lesson module "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.). They will take a 10 multiple choice question quiz about this lesson. They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
 
 # Lesson 4: Low-Fidelity Prototype
-(This first line was because I used ChatGPT and not Claude.ai)
+(This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
 Create the fourth lesson module "Low-Fidelity Prototypes." The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes. The students will take a 10 multiple choice question quiz based on this lesson. The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project.
 
 # Lesson 5: User Research Part 1
-(This first line was because I used ChatGPT and node Claude.ai)
+(This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
 Create the fifth lesson module "User Research Part 1." The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively. The students will take a 10 multiple-choice question quiz based on this lesson. The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignemnt.
 
 # Lesson 6: Figma/High-Fidelity Prototype
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with claude's agentic AI. Please only respond in text:
+Create the sixth lesson module "Figma/High-Fidelity Prototype." The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components. The students will take a 10 multiple choice question quiz based on the lesson. The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype.
+
 # Lesson 7: User Research Part 2
 # Lesson 8: HTML, CSS, and Github
 # Lesson 1: What is HCI?
