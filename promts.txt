@@ -7,53 +7,43 @@
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
 "Create the second lesson module "Psychology Applied in HCI." Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines and the Gestalt Principles. The students will take a 10 multiple choice question quiz. The students will also have an assignment called "Determining Gestalt Principles" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is."
 
-# Lesson 3: UI/UX Design
+# Lesson 3: Visual Design Principles
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with claude's agentic AI. Please only respond in text:
+"Create the third lesson module, "Visual Design Principles." Students will learn: Typography, Color Theory, Layout and Spacing, Visual Hierarchy, and UI Guidelines. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have a coding lab that through a set of instructions telling them what to do, but not how to do it, take a unformatted web page and "fix" it using visual design principles."
+
+# Lesson 4: Gestalt Principles and Visual perception
+
+# Lesson 5: UI/UX Design
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
-Create the third lesson module "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.). They will take a 10 multiple choice question quiz about this lesson. They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
+Create the fifth lesson module "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.). They will take a 10 multiple choice question quiz about this lesson. They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
 
-# Lesson 4: Low-Fidelity Prototype
+# Lesson 6: Information Architecture and User Flows
+
+# Lesson 7: Low-Fidelity Prototype
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the fourth lesson module "Low-Fidelity Prototypes." The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes. The students will take a 10 multiple choice question quiz based on this lesson. The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project.
+Create the seventh lesson module "Low-Fidelity Prototypes." The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes. The students will take a 10 multiple choice question quiz based on this lesson. The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project.
 
-# Lesson 5: User Research Part 1
+# Lesson 8: User Research Part 1
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the fifth lesson module "User Research Part 1." The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively. The students will take a 10 multiple-choice question quiz based on this lesson. The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignemnt.
+Create the eighth lesson module "User Research Part 1." The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively. The students will take a 10 multiple-choice question quiz based on this lesson. The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignemnt.
 
-# Lesson 6: Figma/High-Fidelity Prototype
+# Lesson 9: User Research Part 2
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the sixth lesson module "Figma/High-Fidelity Prototype." The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components. The students will take a 10 multiple choice question quiz based on the lesson. The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype.
+Create the ninth lesson module: "User Research Part 2." Students will learn what user journeys and personas are, as well as other techniques that have not been included in this prompt: https://chatgpt.com/share/6a0751cf-41a4-83ea-aa63-3f0699d6880b. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique.
 
-# Lesson 7: User Research Part 2
+# Lesson 10: Figma/High-Fidelity Prototype
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the seventh lesson module: "User Research Part 2." Students will learn what user journeys and personas are, as well as other techniques that have not been included in this prompt: https://chatgpt.com/share/6a0751cf-41a4-83ea-aa63-3f0699d6880b. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique.
+Create the tenth lesson module "Figma/High-Fidelity Prototype." The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components. The students will take a 10 multiple choice question quiz based on the lesson. The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype.
 
-# Lesson 8: HTML, CSS, and Github
-(This first line was because I used ChatGPT and not DeepSeek)
-This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the eighth lesson module "HTML, CCSS, and GitHub." The students will learn What CSS is and what is stands for, what HTML is and what it stands for, how to set up HTML and CSS files, and basic HTML elements and CSS properties that could regularly be used when creating a website. Students will also learn how to use GitHub so they are able to better collaborate better across devices. The students will take a midterm that that will consist of 50 multiple choice questions that include information from this current lesson, as well as questions from these previous lessons:
-[Canvas Link 1]
-[Canvas Link 2]
-[Canvas Link 3]
-[Canvas Link 4]
-[Canvas Link 5]
-[Canvas Link 6]
-[Canvas Link 7]
-The students will also have a coding lab that requires them to follow instructions that would cause them to create a previously planned out website page (e.g., create a button that aligns to the right side of the page).
-
-# Lesson 9: JavaScript
-(This first line was because I used ChatGPT and not DeepSeek)
-This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the ninth lesson module "JavaScript." The students will learn what JavaScript is and how to set up it, how JavaScript is connected to HTML and CSS, and examples of functions that run with HTML and CSS. The students will take a 10 multiple choice question quiz about this lesson. The students will also include a coding lab that requires the students to follow a set of instructions that will provide functionality to a website using JavaScript.
-
-# Lesson 10: Usability Testing
-# Lesson 11: Dynamic DOM, API Calls, and servers with Node.js and Express.js
-# Lesson 12: Local Storage and Database Basics
-# Lesson 13: Responsive/Mobile Design and PWAs
-# Lesson 14: Accessibility annd Inclusive Design
+# Lesson 11: Usability Testing
+# Lesson 12: Accessibility and Inclusive Design
+# Lesson 13: Emerging Technologies
+# Lesson 14: Ethics in HCI and Emerging Technologies
 # Lesson 15: Final presentation
 # Lesson 16: Finals Week (Final Exam)
