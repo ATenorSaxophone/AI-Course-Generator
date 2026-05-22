@@ -23,6 +23,9 @@ This is a test from prompting with claude's agentic AI. Please only respond in t
 Create the fifth lesson module "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.). They will take a 10 multiple choice question quiz about this lesson. They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
 
 # Lesson 6: Information Architecture and User Flows
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
+Create the fourth lesson module, "Information Architecture and User Flows." Students will learn: Organizing information, Site maps, Navigation systems, Card sorting, and user flow diagrams. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an Assignment where the students read a article found on the web about an emerging piece of technology and discuss how the piece of technology may change interaction design.
 
 # Lesson 7: Low-Fidelity Prototype
 (This first line was because I used ChatGPT and not DeepSeek)
