@@ -13,6 +13,9 @@ This is a test from prompting with claude's agentic AI. Please only respond in t
 "Create the third lesson module, "Visual Design Principles." Students will learn: Typography, Color Theory, Layout and Spacing, Visual Hierarchy, and UI Guidelines. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have a coding lab that through a set of instructions telling them what to do, but not how to do it, take a unformatted web page and "fix" it using visual design principles."
 
 # Lesson 4: Gestalt Principles and Visual perception
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
+Create the fourth lesson module, "Gestalt Principles and Visual Perception" Students will learn: What each of the Gestalt Principles are and how to apply the gestalt principles to interfaces. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an Assignment where the students will look at a few images of examples of Gestalt Principles and the students will have to determine which Gestalt Principle it is and why it was used in this example.
 
 # Lesson 5: UI/UX Design
 (This first line was because I used ChatGPT and not DeepSeek)
