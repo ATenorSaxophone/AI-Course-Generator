@@ -64,5 +64,9 @@ This is a test from prompting with DeepSeek's agentic AI. Please only respond in
 Create the thirteenth lesson module, "Emerging Technologies." Students will learn: Artificial Intelligence in UX (which will help lead into ethics (next lesson)), Augmented Reality, Virtual Reality, Smart Environments, Internet of Things, and Future trends in HCI. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment where the students are required to read a provided article and discuss how this piece of technology may change interaction design.
 
 # Lesson 14: Ethics in HCI and Emerging Technologies
+(This first line was because I used ChatGPT and not DeepSeek)
+This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
+Create the fourteenth lesson module, "Ethics in HCI and Emerging Technologies" Students will learn:Dark patterns, persuasive technology, privacy concerns, bias in technology, ethical responsibilities of designers, and trust and transparency. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an assignment where the students will be required to read 1 or 2 shorter ethical case studies and write their answers to a prompt, while also responding to 2 other responses from other students.
+
 # Lesson 15: Final presentation
 # Lesson 16: Finals Week (Final Exam)
