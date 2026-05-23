@@ -48,6 +48,11 @@ This is a test from prompting with claude's agentic AI. Please only respond in t
 Create the tenth lesson module "Figma/High-Fidelity Prototype." The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components. The students will take a 10 multiple choice question quiz based on the lesson. The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype.
 
 # Lesson 11: Usability Testing
+This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
+(This first line was because I used ChatGPT and not DeepSeek)
+Create the eleventh lesson module, "Information Architecture and User Flows." Students will learn:
+What usability testing is, the difference between moderated and unmoderated usability testing, and how to efficiently conduct each type of usability test. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an Assignment that requires each group to perform twice as many usability tests as there are group members (1 of each kind person person). For moderated usability testing specifically, two students will test 1 participant (one as the tester, the other as the note taker).
+
 # Lesson 12: Accessibility and Inclusive Design
 # Lesson 13: Emerging Technologies
 # Lesson 14: Ethics in HCI and Emerging Technologies
