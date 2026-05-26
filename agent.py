@@ -36,3 +36,14 @@ def create_canvas_quiz():
 @tool
 def create_canvas_assignment():
     return 0
+
+#create agent with tools and deepseek model
+agent = create_deep_agent(
+    model=deepseek_model,
+    tools=[
+        create_canvas_module,
+        create_canvas_page,
+        create_canvas_quiz,
+        create_canvas_assignment
+    ],
+)
