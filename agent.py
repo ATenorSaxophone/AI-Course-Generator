@@ -13,3 +13,7 @@ load_dotenv()
 @tool
 def create_canvas_module():
     return 0
+
+@tool
+def create_canvas_page():
+    return 0
