@@ -21,3 +21,7 @@ def create_canvas_page():
 @tool
 def create_canvas_quiz():
     return 0
+
+@tool
+def create_canvas_assignment():
+    return 0
