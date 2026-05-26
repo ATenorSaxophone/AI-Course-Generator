@@ -3,9 +3,13 @@ from dotenv import load_dotenv
 
 from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
-from langchain.tools import Tool
+from langchain.tools import tool
 
 from mcp.server.fastmcp import FastMCP
 
 # Get .env variables
 load_dotenv()
+
+@tool
+def create_canvas_module():
+    return 0
