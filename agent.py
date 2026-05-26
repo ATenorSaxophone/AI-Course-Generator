@@ -3,8 +3,8 @@ import os
 
 from dotenv import load_dotenv
 
-from langchain.agents import create_agent
-from langchain_anthropic import ChatAnthropic
+from langchain_openai import OpenAI
+from deepagents import create_deep_agent
 from langchain.tools import tool
 
 from mcp.server.fastmcp import FastMCP
@@ -12,6 +12,14 @@ from mcp.server.fastmcp import FastMCP
 # Get .env variables
 load_dotenv()
 deepseek_key = os.getenv("MY_DEEPSEEK_KEY")
+
+#create DeepSeek model
+deepseek_model = OpenAI(
+    model="deepseek-v4-flash",
+    open_api_base="https://api.deepseek.com",
+    open_api_key=deepseek_key,
+    temperature=0.7
+)
 
 @tool
 def create_canvas_module():
