@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from langchain_openai import OpenAI
 from deepagents import create_deep_agent
 from langchain.tools import tool
+from langchain_community.tools.tavily_search import TavilySearchResults
 
 from mcp.server.fastmcp import FastMCP
 
@@ -37,6 +38,14 @@ def create_canvas_quiz():
 def create_canvas_assignment():
     return 0
 
+#Create search tool using Tavily Search Results
+search_tool = TavilySearchResults(
+    max_results=5,
+    include_answer=True,
+    search_depth="advanced"
+)
+
+
 #create agent with tools and deepseek model
 agent = create_deep_agent(
     model=deepseek_model,
@@ -44,6 +53,8 @@ agent = create_deep_agent(
         create_canvas_module,
         create_canvas_page,
         create_canvas_quiz,
-        create_canvas_assignment
+        create_canvas_assignment,
+        search_tool
     ],
+    system_prompt=""
 )
