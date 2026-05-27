@@ -22,9 +22,24 @@ deepseek_model = ChatOpenAI(
     temperature=0.7
 )
 
-# @tool
-# def create_canvas_module():
-#     return 0
+@tool                    #Type hints for create_canvas_module tool
+def create_canvas_module(course_id: str, module_name: str) -> str:
+    #Docstring for create_canvas_module tool
+    """
+    Creates a module in a Canvas Instructure course.
+    
+    Parameters:
+    - course_id: The ID of the Canvas course where the module will be created.
+    - module_name: The name of the module to be created.
+
+    Returns:
+    - A string confirming the creation of the module with the course ID and module name.
+    """
+
+    # Here you would add the actual implementation to interact with the Canvas API to create a module.
+
+    #return a confirmation message for the created module
+    return f"Canvas module created for course: {course_id}, module: {module_name}"
 
 # @tool
 # def create_canvas_page():
@@ -49,7 +64,7 @@ with open("workflow.md", "r") as file:
 agent = create_deep_agent(
     model=deepseek_model,
     tools=[
-    #     create_canvas_module,
+        create_canvas_module,
     #     create_canvas_page,
     #     create_canvas_quiz,
     #     create_canvas_assignment,
