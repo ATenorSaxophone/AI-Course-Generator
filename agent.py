@@ -41,9 +41,25 @@ def create_canvas_module(course_id: str, module_name: str) -> str:
     #return a confirmation message for the created module
     return f"Canvas module created for course: {course_id}, module: {module_name}"
 
-# @tool
-# def create_canvas_page():
-#     return 0
+@tool
+def create_canvas_page(canvas_id: str, page_title: str, page_content: str) -> str:
+    #Docstring for create_canvas_page tool
+    """
+    Creates a page in a Canvas Instructure course.
+
+    Parameters:
+    - canvas_id: The ID of the Canvas course where the page will be created.
+    - page_title: The title of the page to be created.
+    - page_content: The content of the page to be created.
+
+    Returns:
+    - A string confirming the creation of the page with the canvas ID and page title.
+    """
+
+    # Here you would add the actual implementation to interact with the Canvas API to create a page.
+
+    #return a confirmation message for the created page
+    return f"Canvas page created for canvas: {canvas_id}, page: {page_title}"
 
 # @tool
 # def create_canvas_quiz():
@@ -65,7 +81,7 @@ agent = create_deep_agent(
     model=deepseek_model,
     tools=[
         create_canvas_module,
-    #     create_canvas_page,
+        create_canvas_page,
     #     create_canvas_quiz,
     #     create_canvas_assignment,
         search_tool
