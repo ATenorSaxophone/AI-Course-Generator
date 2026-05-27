@@ -41,6 +41,7 @@ def create_canvas_module(course_id: str, module_name: str) -> str:
     #return a confirmation message for the created module
     return f"Canvas module created for course: {course_id}, module: {module_name}"
 
+
 @tool
 def create_canvas_page(canvas_id: str, page_title: str, page_content: str) -> str:
     #Docstring for create_canvas_page tool
@@ -61,9 +62,27 @@ def create_canvas_page(canvas_id: str, page_title: str, page_content: str) -> st
     #return a confirmation message for the created page
     return f"Canvas page created for canvas: {canvas_id}, page: {page_title}"
 
-# @tool
-# def create_canvas_quiz():
-#     return 0
+
+@tool
+def create_canvas_quiz(canvas_id: str, quiz_title: str, quiz_questions: str, quiz_answers: str) -> str:
+    #Docstring for create_canvas_quiz tool
+    """
+    Creates a quiz in a Canvas Instructure course.
+    
+    Parameters:
+    - canvas_id: The ID of the Canvas course where the quiz will be created.
+    - quiz_title: The title of the quiz to be created.
+    - quiz_questions: The questions of the quiz to be created.
+    - quiz_answers: The answers of the quiz to be created.
+
+    Returns:
+    - A string confirming the creation of the quiz with the canvas ID and quiz title.
+    """
+
+    # Here you would add the actual implementation to interact with the Canvas API to create a quiz.
+
+    #return a confirmation message for the created quiz
+    return f"Canvas quiz created for canvas: {canvas_id}, quiz: {quiz_title}"
 
 # @tool
 # def create_canvas_assignment():
@@ -82,7 +101,7 @@ agent = create_deep_agent(
     tools=[
         create_canvas_module,
         create_canvas_page,
-    #     create_canvas_quiz,
+        create_canvas_quiz,
     #     create_canvas_assignment,
         search_tool
     ],
