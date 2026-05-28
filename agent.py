@@ -35,4 +35,4 @@ agent = create_deep_agent(
 )
 
 #Run agent with prompt input
-output = agent.invoke()
+output = agent.invoke({"messages": [{"role": "user", "content": ""}]})
