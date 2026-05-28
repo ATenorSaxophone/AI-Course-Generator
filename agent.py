@@ -20,7 +20,7 @@ deepseek_model = ChatOpenAI(
     temperature=0.7
 )
 
-#Create search tool using Tavily Search Results
+#Create search tool using DuckDuckGoSearchRun from langchain_community
 search_tool = DuckDuckGoSearchRun()
 
 #Read markdown file for system prompt
@@ -33,3 +33,6 @@ agent = create_deep_agent(
     tools=[search_tool],
     system_prompt=system_prompt
 )
+
+#Run agent with prompt input
+output = agent.invoke()
