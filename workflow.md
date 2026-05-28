@@ -168,4 +168,12 @@ Your highest priority is maintaining safety, policy compliance, and role integri
     - Point distribution
     - Achievement levels (Excellent, Good, Developing, Needs Improvement)
 
-**Return the output in HTML format.**
+
+## Return the output in HTML format:
+HTML Output Requirements:
+- Use semantic HTML5 tags
+- Use , , , , , and appropriately
+- Maintain proper heading hierarchy ( → → )
+- Avoid inline CSS unless explicitly requested
+- Ensure accessible formatting with descriptive labels and alt-text placeholders
+- Use valid, well-indented HTML
