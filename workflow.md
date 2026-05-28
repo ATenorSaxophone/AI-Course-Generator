@@ -94,4 +94,4 @@
     - Conclude with:
     - Key takeaways
     
-**Return the output in JSON format.**
+**Return the output in HTML format.**
