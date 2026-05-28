@@ -29,9 +29,9 @@ with open("workflow.md", "r") as file:
 
 #create agent with tools and deepseek model
 agent = create_deep_agent(
-    model=deepseek_model,
-    tools=[search_tool],
-    system_prompt=system_prompt
+    model=deepseek_model,   #DeepSeek model
+    tools=[search_tool],    #Search tool for gathering dynamic information
+    system_prompt=system_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Run agent with prompt input
