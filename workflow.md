@@ -192,6 +192,8 @@ Constraints:
     - True/False
     - Short answer
     - Scenario-based questions
+    - Keep incorrect question answers similar to the right answer.
+    - Keep a variety of correct answers (e.g., Do not make every answer the same multiple-choice letter.)
 
     **Provide an answer key with explanations.**
 
