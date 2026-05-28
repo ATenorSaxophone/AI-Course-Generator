@@ -1,6 +1,8 @@
 # Lesson 1: What is HCI?
 (This first line is because I used Claude.ai and not DeepSeek)
-"Create the first lesson module called "What is HCI?" that contains pages that teach students about "The definition of Human-Computer Interaction" and "what HCI includes in day-to-day activities (e.g., human psychology and cognition in relation to technology)." The module will also include 1 quiz that contains 10 multiple choice questions. Lastly, the module will also include a assignment that calls for the students to fill out a syllabus agreement survey and direct them to join a group for the group presentation and project assignment due at the end of the semester."
+Lesson: Create the first lesson readings called "What is HCI?" that contains pages that teach students about "The definition of Human-Computer Interaction" and "what HCI includes in day-to-day activities (e.g., human psychology and cognition in relation to technology)." 
+Quiz: The module will also include 1 quiz that contains 10 multiple choice questions. 
+Assignment: The module will also include a assignment that calls for the students to fill out a syllabus agreement survey and direct them to join a group for the group presentation and project assignment due at the end of the semester. Do not add "join a group" to the rubric, as if they do not join one willingly, they will be assigned to one. Do not add the extra deliverables to the "join a group," as groups are built into the class and do not need proof of joining a group. Keep the "join a group" deliverable to remind the student to join a group, else they'll be put into a random group.
 
 # Lesson 2: Psychology Applied in HCI
 (This first line was because I used ChatGPT and not DeepSeek)
