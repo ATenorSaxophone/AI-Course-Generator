@@ -12,10 +12,14 @@ Lesson: Create the second lesson readings "Psychology Applied in HCI." Students 
 Quiz: The students will take a 10 multiple choice question quiz. 
 Assignment: The students will also have an assignment called "Determining Gestalt Principles" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is." Generate example images of whatever Gestalt Principles are going to be used. DO NOT USE WORDS to allow students to figure which principle it is themselves. Generate 4-5 different examples for the assignment. 
 
+
 # Lesson 3: Visual Design Principles
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-"Create the third lesson module, "Visual Design Principles." Students will learn: Typography, Color Theory, Layout and Spacing, Visual Hierarchy, and UI Guidelines. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have a coding lab that through a set of instructions telling them what to do, but not how to do it, take a unformatted web page and "fix" it using visual design principles."
+Lesson: Create the third lesson readings, "Visual Design Principles." Students will learn: Typography, Color Theory, Layout and Spacing, Visual Hierarchy, and UI Guidelines.
+Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
+Assignment: The students will also have a coding lab that through a set of instructions telling them what to do, but not how to do it, take a unformatted web page and "fix" it using visual design principles.
+
 
 # Lesson 4: Gestalt Principles and Visual perception
 (This first line was because I used ChatGPT and not DeepSeek)
