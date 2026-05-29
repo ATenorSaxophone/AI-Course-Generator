@@ -45,5 +45,11 @@
         "lesson prompt": "Create the eighth lesson readings \"User Research Part 1.\" The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignment."
+    },
+
+    "lesson 9": {
+        "lesson prompt": "Create the ninth lesson readings: \"User Research Part 2.\" Students will learn what user journeys and personas are, as well as other techniques.",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique."
     }
 }
