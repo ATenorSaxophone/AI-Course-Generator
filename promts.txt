@@ -32,7 +32,10 @@ Assignment: The students will also have an assignment called "Determining Gestal
 # Lesson 5: UI/UX Design
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
-Create the fifth lesson module "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.). They will take a 10 multiple choice question quiz about this lesson. They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
+Lesson: Create the fifth lesson readings "UI/UX Design." Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iteate, etc.).
+Quiz: The students will take a 10 multiple choice question quiz about this lesson.
+Assignment: They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs.
+
 
 # Lesson 6: Information Architecture and User Flows
 (This first line was because I used ChatGPT and not DeepSeek)
