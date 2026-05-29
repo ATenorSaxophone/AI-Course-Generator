@@ -27,5 +27,11 @@
         "lesson prompt": "Create the fifth lesson readings \"UI/UX Design.\" Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iterate, etc.).",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt":"They will also have an assignment called determining good vs bad design. The assignment requires the students to use the knowledge they got from this lesson, as well as the previous lesson on UI design guidelines and the Gestalt Principles to determine whether the designs they see are considered to be good or bad designs."
+    },
+
+    "lesson 6": {
+        "lesson prompt": "Create the sixth lesson readings \"UI/UX Design.\" Students will learn how to differentiate between User Interface and User Experience design, learn why both matter to design as a whole, and learn the design process (Empathize, Define, Iterate, etc.).",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also have an Assignment where the students read a article found on the web about an emerging piece of technology and discuss how the piece of technology may change interaction design."
     }
 }
