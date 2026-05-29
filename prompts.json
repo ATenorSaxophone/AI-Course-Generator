@@ -39,5 +39,11 @@
         "lesson prompt": "Create the seventh lesson readings \"Low-Fidelity Prototypes.\" The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project."
+    },
+
+    "lesson 8": {
+        "lesson prompt": "Create the eighth lesson readings \"User Research Part 1.\" The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively.",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignment."
     }
 }
