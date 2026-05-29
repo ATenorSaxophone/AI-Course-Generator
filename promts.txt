@@ -4,10 +4,13 @@ Lesson: Create the first lesson readings called "What is HCI?" that contains pag
 Quiz: The module will also include 1 quiz that contains 10 multiple choice questions. 
 Assignment: The module will also include a assignment that calls for the students to fill out a syllabus agreement survey and direct them to join a group for the group presentation and project assignment due at the end of the semester. Do not add "join a group" to the rubric, as if they do not join one willingly, they will be assigned to one. Do not add the extra deliverables to the "join a group," as groups are built into the class and do not need proof of joining a group. Keep the "join a group" deliverable to remind the student to join a group, else they'll be put into a random group.
 
+
 # Lesson 2: Psychology Applied in HCI
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text: 
-"Create the second lesson module "Psychology Applied in HCI." Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines and the Gestalt Principles. The students will take a 10 multiple choice question quiz. The students will also have an assignment called "Determining Gestalt Principles" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is."
+Lesson: Create the second lesson readings "Psychology Applied in HCI." Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines and the Gestalt Principles. 
+Quiz: The students will take a 10 multiple choice question quiz. 
+Assignment: The students will also have an assignment called "Determining Gestalt Principles" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is." Generate example images of whatever Gestalt Principles are going to be used. DO NOT USE WORDS to allow students to figure which principle it is themselves. Generate 4-5 different examples for the assignment. 
 
 # Lesson 3: Visual Design Principles
 (This first line was because I used ChatGPT and not DeepSeek)
