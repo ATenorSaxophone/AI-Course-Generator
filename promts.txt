@@ -88,7 +88,7 @@ Assignment: The students will also have an Assignment that requires each group t
 # Lesson 12: Accessibility and Inclusive Design
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
-Lesson: Create the eleventh lesson module, "Accessibility and Inclusive Design." Students will learn: Different types of inclusive/accessibility features, such as alt text in images and dark mode, as well as how to implement them (e.g., using @media to create a dark mode).
+Lesson: Create the eleventh lesson readings, "Accessibility and Inclusive Design." Students will learn: Different types of inclusive/accessibility features, such as alt text in images and dark mode, as well as how to implement them (e.g., using @media to create a dark mode).
 Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
 Assignment: The students will also have a coding lab that requires the students to “fix” a website page by including accessibility and inclusive features (e.g., alt text in images and dark mode).
 
@@ -96,7 +96,7 @@ Assignment: The students will also have a coding lab that requires the students 
 # Lesson 13: Emerging Technologies
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
-Lesson: Create the thirteenth lesson module, "Emerging Technologies." Students will learn: Artificial Intelligence in UX (which will help lead into ethics (next lesson)), Augmented Reality, Virtual Reality, Smart Environments, Internet of Things, and Future trends in HCI.
+Lesson: Create the thirteenth lesson readings, "Emerging Technologies." Students will learn: Artificial Intelligence in UX (which will help lead into ethics (next lesson)), Augmented Reality, Virtual Reality, Smart Environments, Internet of Things, and Future trends in HCI.
 Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
 Assignment: The students will also have an assignment where the students are required to read a provided article and discuss how this piece of technology may change interaction design.
 
@@ -104,7 +104,7 @@ Assignment: The students will also have an assignment where the students are req
 # Lesson 14: Ethics in HCI and Emerging Technologies
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
-Lesson: Create the fourteenth lesson module, "Ethics in HCI and Emerging Technologies" Students will learn:Dark patterns, persuasive technology, privacy concerns, bias in technology, ethical responsibilities of designers, and trust and transparency.
+Lesson: Create the fourteenth lesson readings, "Ethics in HCI and Emerging Technologies" Students will learn:Dark patterns, persuasive technology, privacy concerns, bias in technology, ethical responsibilities of designers, and trust and transparency.
 Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
 Assignment: The students will also have an assignment where the students will be required to read 1 or 2 shorter ethical case studies and write their answers to a prompt, while also responding to 2 other responses from other students.
 
