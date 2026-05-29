@@ -44,10 +44,14 @@ Lesson: Create the fourth lesson readings "Information Architecture and User Flo
 Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
 Assignment: The students will also have an Assignment where the students read a article found on the web about an emerging piece of technology and discuss how the piece of technology may change interaction design.
 
+
 # Lesson 7: Low-Fidelity Prototype
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with claude's agentic AI. Please only respond in text:
-Create the seventh lesson module "Low-Fidelity Prototypes." The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes. The students will take a 10 multiple choice question quiz based on this lesson. The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project.
+Lesson: Create the seventh lesson readings "Low-Fidelity Prototypes." The students will learn what Low-Fidelity Prototypes are (with examples), benefits of using low-fidelity prototypes, and comparisons to high-fidelity prototypes.
+Quiz: The students will take a 10 multiple choice question quiz based on this lesson.
+Assignment: The students will also complete an assignment which requires each group to create 5 to 7 low-fidelity prototypes for each idea for features they get for their final project.
+
 
 # Lesson 8: User Research Part 1
 (This first line was because I used ChatGPT and not DeepSeek)
