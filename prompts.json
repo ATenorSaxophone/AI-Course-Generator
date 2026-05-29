@@ -6,14 +6,20 @@
     },
 
     "lesson 2": {
-        "lesson prompt": "Create the second lesson readings called \"Psychology Applied in HCI.\" Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines and the Gestalt Principles.",
+        "lesson prompt": "Create the second lesson readings \"Intro to Psychology Applied in HCI.\" Students will learn about human perception and cognition in relation to technology. They will also learn about UI design guidelines.",
         "quiz prompt": "The module will also include 1 quiz that contains 10 multiple choice questions.",
-        "assignment prompt": "The students will also have an assignment called \"Determining Gestalt Principles\" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is.\" Generate example images of whatever Gestalt Principles are going to be used. DO NOT USE WORDS to allow students to figure which principle it is themselves. Generate 4-5 different examples for the assignment."
+        "assignment prompt": "The students will also have an assignment called \"Website Analysis\" where the students will look at a website of their choice and analyze it based on the lesson, which included human perception and cognition in relation to technology and UI guidelines."
     },
 
     "lesson 3": {
         "lesson prompt": "Create the third lesson readings called \"Designing for User Experience.\" Students will learn about user-centered design principles and how to apply them in real-world scenarios.",
         "quiz prompt": "The module will also include 1 quiz that contains 10 multiple choice questions.",
         "assignment prompt": "The students will also have a coding lab that through a set of instructions telling them what to do, but not how to do it, take a unformatted web page and \"fix\" it using visual design principles. Create a HTML page that is unformatted for the students to fix create the same HTML page with a CSS page that makes it formatted as a solution."
+    },
+
+    "lesson 4": {
+        "lesson prompt": "Create the fourth lesson readings, \"Gestalt Principles and Visual Perception\" Students will learn: What each of the Gestalt Principles are and how to apply the gestalt principles to interfaces (in-depth).",
+        "quiz prompt": "The module will also include 1 quiz that contains 10 multiple choice questions.",
+        "assignment prompt": "The students will also have an assignment called \"Determining Gestalt Principles\" where the students will look at images of gestalt principles and will have to determine which gestalt principle it is.\" Generate example images of whatever Gestalt Principles are going to be used. DO NOT USE WORDS to allow students to figure which principle it is themselves. Generate 4-5 different examples for the assignment."
     }
 }
