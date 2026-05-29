@@ -40,7 +40,9 @@ Assignment: They will also have an assignment called determining good vs bad des
 # Lesson 6: Information Architecture and User Flows
 (This first line was because I used ChatGPT and not DeepSeek)
 This is a test from prompting with DeepSeek's agentic AI. Please only respond in text:
-Create the fourth lesson module, "Information Architecture and User Flows." Students will learn: Organizing information, Site maps, Navigation systems, Card sorting, and user flow diagrams. The students will also take a 10 multiple choice question quiz based on the lesson. The students will also have an Assignment where the students read a article found on the web about an emerging piece of technology and discuss how the piece of technology may change interaction design.
+Lesson: Create the fourth lesson readings "Information Architecture and User Flows." Students will learn: Organizing information, Site maps, Navigation systems, Card sorting, and user flow diagrams.
+Quiz: The students will also take a 10 multiple choice question quiz based on the lesson.
+Assignment: The students will also have an Assignment where the students read a article found on the web about an emerging piece of technology and discuss how the piece of technology may change interaction design.
 
 # Lesson 7: Low-Fidelity Prototype
 (This first line was because I used ChatGPT and not DeepSeek)
