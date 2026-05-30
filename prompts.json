@@ -81,6 +81,10 @@
         "lesson prompt": "Create the fourteenth lesson readings, \"Ethics in HCI and Emerging Technologies\" Students will learn:Dark patterns, persuasive technology, privacy concerns, bias in technology, ethical responsibilities of designers, and trust and transparency.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also have an assignment where the students will be required to read 1 or 2 shorter ethical case studies and write their answers to a prompt, while also responding to 2 other responses from other students."
+    },
+
+    "lesson 15": {
+        "final presentation prompt": "Create the final presentation assignment and rubric. For the final presentation, the students are required to get with their groups and create a final presentation that consists of their designs (including a demo), research process, and implementation that they worked on across the semester, showing what they learned from this HCI class."
     }
 
 
