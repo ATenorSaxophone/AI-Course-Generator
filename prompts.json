@@ -43,7 +43,7 @@
 
     "lesson 8": {
         "lesson prompt": "Create the eighth lesson readings \"User Research Part 1.\" The students will learn SOME of the different types of research techniques (such as interviews, surveys, and contextual inquiries). The students will also learn in more detail about these research techniques and how to use them effectively.",
-        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "quiz prompt": "The students will take a 50 multiple-choice question midterm based on this and previous lessons.",
         "assignment prompt": "The students will also be assigned to doing one contextual inquiry, as well as gathering and analyzing data based on their contextual inquiries that is based on their group's final project assignment."
     },
 
@@ -51,5 +51,11 @@
         "lesson prompt": "Create the ninth lesson readings: \"User Research Part 2.\" Students will learn what user journeys and personas are, as well as other techniques.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also have an assignment that requires the students to create one Journey Map and one Persona to ensure their understanding of each research technique."
+    },
+
+    "lesson 10": {
+        "lesson prompt": "Create the tenth lesson readings \"Figma/High-Fidelity Prototype.\" The students will learn what a high-fidelity prototype is, a reiteration of the comparison between low and high fidelity prototypes, and a workshop of Figma. For the Figma workshop, it will discuss the very basics of how to make a wireframe, how to use design templates, and how to make and use components.",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz based on the lesson.",
+        "assignment prompt": "The students will also have to complete an assignment that requires the students, within their group, to create a high-fidelity prototype using Figma. The students will also use their low-fidelity prototypes and their contextual inquiries to influence their high-fidelity prototype."
     }
 }
