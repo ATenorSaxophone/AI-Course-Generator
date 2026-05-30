@@ -39,5 +39,17 @@ agent = create_deep_agent(
 with open("prompts.json", "r") as file:
     prompts = json.load(file)
 
-#Run agent with prompt input
-output = agent.invoke({"messages": [{"role": "user", "content": ""}]})
+#Run agent with prompt inputs and print outputs
+for key, value in prompts.items():
+    lesson_prompt = value["lesson prompt"]
+    quiz_prompt = value["quiz prompt"]
+    assignment_prompt = value.get("assignment prompt", "")
+    
+    # Run the agent with the combined prompt
+    lesson_output = agent.invoke({"messages": [{"role": "user", "content": lesson_prompt}]})
+    quiz_output = agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
+    assignment_output = agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
+    
+    print(f"Output for {key}:\n{lesson_output}\n")
+    print(f"Quiz Output for {key}:\n{quiz_output}\n")
+    print(f"Assignment Output for {key}:\n{assignment_output}\n")
