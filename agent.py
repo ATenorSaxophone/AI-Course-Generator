@@ -25,7 +25,7 @@ deepseek_model = ChatOpenAI(
 search_tool = DuckDuckGoSearchRun()
 
 #Read markdown file for system prompt
-with open("workflow.md", "r") as file:
+with open("workflow.md", "r", encoding="utf-8") as file:
     system_prompt = file.read()
 
 #create agent with tools and deepseek model
@@ -36,20 +36,36 @@ agent = create_deep_agent(
 )
 
 #get prompts from prompts.json file
-with open("prompts.json", "r") as file:
+with open("prompts.json", "r", encoding="utf-8") as file:
     prompts = json.load(file)
 
 #Run agent with prompt inputs and print outputs
 for key, value in prompts.items():
-    lesson_prompt = value["lesson prompt"]
-    quiz_prompt = value["quiz prompt"]
-    assignment_prompt = value.get("assignment prompt", "")
+
+    if key == "lesson 15":
+        final_project_prompt = value["final presentation prompt"]
+        print(final_project_prompt)
     
-    # Run the agent with the combined prompt
-    lesson_output = agent.invoke({"messages": [{"role": "user", "content": lesson_prompt}]})
-    quiz_output = agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
-    assignment_output = agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
+        final_project_output = agent.invoke({"messages": [{"role": "user", "content": final_project_prompt}]})
+        print(f"Final Project Output for {key}:\n{final_project_output}\n")
+
+    elif key == "lesson 16":
+        final_exam_prompt = value["final exam prompt"]
+        print(final_exam_prompt)
     
-    print(f"Output for {key}:\n{lesson_output}\n")
-    print(f"Quiz Output for {key}:\n{quiz_output}\n")
-    print(f"Assignment Output for {key}:\n{assignment_output}\n")
+        final_exam_output = agent.invoke({"messages": [{"role": "user", "content": final_exam_prompt}]})
+        print(f"Final Exam Output for {key}:\n{final_exam_output}\n")
+
+    else:
+        lesson_prompt = value["lesson prompt"]
+        quiz_prompt = value["quiz prompt"]
+        assignment_prompt = value["assignment prompt"]
+        
+        # Run the agent with the combined prompt
+        lesson_output = agent.invoke({"messages": [{"role": "user", "content": lesson_prompt}]})
+        quiz_output = agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
+        assignment_output = agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
+    
+        print(f"Readings Output for {key}:\n{lesson_output}\n")
+        print(f"Quiz Output for {key}:\n{quiz_output}\n")
+        print(f"Assignment Output for {key}:\n{assignment_output}\n")
