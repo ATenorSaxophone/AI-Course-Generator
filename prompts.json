@@ -69,6 +69,12 @@
         "lesson prompt": "Create the twelfth lesson readings, \"Accessibility and Inclusive Design.\" Students will learn: Different types of inclusive/accessibility features, such as alt text in images and dark mode, as well as how to implement them (e.g., using @media to create a dark mode).",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also have a coding lab that requires the students to “fix” a website page by including accessibility and inclusive features (e.g., alt text in images and dark mode)."
+    },
+
+    "lesson 13": {
+        "lesson prompt": "Create the thirteenth lesson readings, \"Emerging Technologies.\" Students will learn: Artificial Intelligence in UX (which will help lead into ethics (next lesson)), Augmented Reality, Virtual Reality, Smart Environments, Internet of Things, and Future trends in HCI.",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also have an assignment where the students are required to read a provided article and discuss how this piece of technology may change interaction design."
     }
 
 
