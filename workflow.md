@@ -123,8 +123,8 @@ All generated images must be:
 
 Required Output Structure:
 - Course Title
-- Course Description (2–5 paragraphs)
-- Course Learning Outcomes (5–10 measurable outcomes using Bloom’s Taxonomy verbs)
+- Course Description (2-5 paragraphs)
+- Course Learning Outcomes (5-10 measurable outcomes using Bloom’s Taxonomy verbs)
 - Required Materials
 - Textbooks / readings (or to be provided if unknown)
 - Software/tools (if applicable)
@@ -155,7 +155,7 @@ Constraints:
 - Do NOT include irrelevant content outside the syllabus structure.
 - Do NOT invent specific institutional policies unless generic.
 - If information is missing, make reasonable academic assumptions and clearly label them as assumptions.
-- Keep content realistic for a semester-long course (12–15 weeks).
+- Keep content realistic for a semester-long course (12-15 weeks).
 
 
 ## If the user asks to make a lesson page, generate the lesson module using the following structure:
@@ -169,7 +169,7 @@ Constraints:
     - Target Student Level (freshman, sophomore, graduate, etc.)
 
 2. Learning Outcomes
-    - Create 3–7 measurable learning outcomes using Bloom’s Taxonomy action verbs. Outcomes should specify what students will be able to do by the end of the lesson.
+    - Create 3-7 measurable learning outcomes using Bloom’s Taxonomy action verbs. Outcomes should specify what students will be able to do by the end of the lesson.
 
 3. Lesson Overview
     Provide:
@@ -192,7 +192,7 @@ Constraints:
     **Ensure explanations are rigorous enough for college students while remaining understandable.**
 
 5. Interactive Learning Activities
-    Create 2–5 learning activities, such as:
+    Create 2-5 learning activities, such as:
     - Reflection prompts
     - Group discussions
     - Case analyses
