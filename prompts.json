@@ -75,6 +75,12 @@
         "lesson prompt": "Create the thirteenth lesson readings, \"Emerging Technologies.\" Students will learn: Artificial Intelligence in UX (which will help lead into ethics (next lesson)), Augmented Reality, Virtual Reality, Smart Environments, Internet of Things, and Future trends in HCI.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also have an assignment where the students are required to read a provided article and discuss how this piece of technology may change interaction design."
+    },
+
+    "lesson 14": {
+        "lesson prompt": "Create the fourteenth lesson readings, \"Ethics in HCI and Emerging Technologies\" Students will learn:Dark patterns, persuasive technology, privacy concerns, bias in technology, ethical responsibilities of designers, and trust and transparency.",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also have an assignment where the students will be required to read 1 or 2 shorter ethical case studies and write their answers to a prompt, while also responding to 2 other responses from other students."
     }
 
 
