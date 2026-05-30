@@ -63,5 +63,13 @@
         "lesson prompt": "Create the eleventh lesson readings, \"Usability Tests.\" Students will learn: What usability testing is, the difference between moderated and unmoderated usability testing, and how to efficiently conduct each type of usability test.",
         "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
         "assignment prompt": "The students will also have an Assignment that requires each group to perform twice as many usability tests as there are group members (1 of each kind person person). For moderated usability testing specifically, two students will test 1 participant (one as the tester, the other as the note taker)."
+    },
+
+    "lesson 12": {
+        "lesson prompt": "Create the twelfth lesson readings, \"Accessibility and Inclusive Design.\" Students will learn: Different types of inclusive/accessibility features, such as alt text in images and dark mode, as well as how to implement them (e.g., using @media to create a dark mode).",
+        "quiz prompt": "The students will take a 10 multiple choice question quiz about this lesson.",
+        "assignment prompt": "The students will also have a coding lab that requires the students to “fix” a website page by including accessibility and inclusive features (e.g., alt text in images and dark mode)."
     }
+
+
 }
