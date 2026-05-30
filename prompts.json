@@ -85,6 +85,10 @@
 
     "lesson 15": {
         "final presentation prompt": "Create the final presentation assignment and rubric. For the final presentation, the students are required to get with their groups and create a final presentation that consists of their designs (including a demo), research process, and implementation that they worked on across the semester, showing what they learned from this HCI class."
+    },
+
+    "lesson 16": {
+        "final exam prompt": "Create the final exam for an HCI class. The final exam will have 75 questions. The questions within the final exam should include: What is HCI?, Psychology Applied in HCI, Visual Design Principles, Gestalt Principles and Visual Perceptions, UI/UX Design, Information Architecture and User Flows, Low-Fidelity Prototypes, User Research, Figma and High-Fidelity Prototypes, Usability Testing, Accessibility and inclusive design, Emerging Technologies, and Ethics in HCI and Emerging Technologies. Keep the same amount of questions for each topic as close as possible."
     }
 
 
