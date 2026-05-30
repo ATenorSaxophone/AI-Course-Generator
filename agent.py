@@ -1,4 +1,5 @@
 # Agent AI that creates Canvas Class about Human-Computer Interaction (HCI) using LangChain and Anthropic's Claude API. The agent will use the FastMCP server to create a Canvas Class with the specified parameters.
+import json
 import os
 
 from dotenv import load_dotenv
@@ -33,6 +34,10 @@ agent = create_deep_agent(
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=system_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
+
+#get prompts from prompts.json file
+with open("prompts.json", "r") as file:
+    prompts = json.load(file)
 
 #Run agent with prompt input
 output = agent.invoke({"messages": [{"role": "user", "content": ""}]})
