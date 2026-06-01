@@ -42,7 +42,7 @@ google_lesson_agent = create_agent(
 )
 
 #Create google quiz agent
-google_quiz_agent = create_agent(
+google_quiz_assignment_agent = create_agent(
     model=google_quiz_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=system_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
