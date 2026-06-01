@@ -75,7 +75,7 @@ for key, value in prompts.items():
     elif key == "lesson 16":
         final_exam_prompt = value["final exam prompt"]
     
-        final_exam_output = google_quiz_agent.invoke({"messages": [{"role": "user", "content": final_exam_prompt}]})
+        final_exam_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": final_exam_prompt}]})
         print("Final Exam Finished!")
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
@@ -93,12 +93,12 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        quiz_output = google_quiz_agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
+        quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
         print("Quiz Finished!")
         print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        assignment_output = google_quiz_agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
+        assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
         print("Assignment Finished!")
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
