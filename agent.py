@@ -16,7 +16,7 @@ google_key = os.getenv("MY_GOOGLE_KEY")
 
 #Create Google AI Studio model
 google_lesson_model = ChatGoogleGenerativeAI(
-    model="gemini-3.5-flash",
+    model="gemini-2.5-flash",
     api_key=os.environ["MY_GOOGLE_KEY"],
     temperature=0.7
 )
@@ -27,25 +27,54 @@ google_quiz_model = ChatGoogleGenerativeAI(
     temperature=0.7
 )
 
+google_presentation_model = ChatGoogleGenerativeAI(
+    model="gemini-3-pro-image",
+    api_key=os.environ["MY_GOOGLE_KEY"],
+    temperature=0.7
+)
+
 #Create search tool using DuckDuckGoSearchRun from langchain_community
 search_tool = DuckDuckGoSearchRun()
 
 #Read markdown file for system prompt
 with open("system_prompts/lesson_workflow.md", "r", encoding="utf-8") as file:
-    system_prompt = file.read()
+    lesson_prompt = file.read()
+
+with open("system_prompts/quiz_assignment_workflow.md", "r", encoding="utf-8") as file:
+    quiz_assignment_prompt = file.read()
+
+with open("system_prompts/presentation_workflow.md", "r", encoding="utf-8") as file:
+    presentation_prompt = file.read()
+
+with open("system_prompts/syllabus_workflow.md", "r", encoding="utf-8") as file:
+    syllabus_prompt = file.read()
 
 #Create google lesson agent
 google_lesson_agent = create_agent(
     model=google_lesson_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
-    system_prompt=system_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+    system_prompt=lesson_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
-#Create google quiz agent
+#Create google quiz and assignmentagent
 google_quiz_assignment_agent = create_agent(
     model=google_quiz_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
-    system_prompt=system_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+    system_prompt=quiz_assignment_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+)
+
+#Create google presentation agent for lessons.
+google_presentation_agent = create_agent(
+    model=google_presentation_model,   #Google Gemini model
+    tools=[search_tool],    #Search tool for gathering dynamic information
+    system_prompt=presentation_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+)
+
+#Create syllabus agent for the course.
+google_syllabus_agent = create_agent(
+    model=google_lesson_model,   #Google Gemini model
+    tools=[search_tool],    #Search tool for gathering dynamic information
+    system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #get prompts from prompts.json file
@@ -65,7 +94,7 @@ for key, value in prompts.items():
     if key == "lesson 15":
         final_project_prompt = value["final presentation prompt"]
     
-        final_project_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": final_project_prompt}]})
+        final_project_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": final_project_prompt}]})
         print("Final Project Finished!")
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
@@ -93,12 +122,17 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": quiz_prompt}]})
+        presentation_output = google_presentation_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"]}]})
+        print("Presentation Finished!")
+        print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+
+        quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + quiz_prompt}]})
         print("Quiz Finished!")
         print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": assignment_prompt}]})
+        assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + assignment_prompt}]})
         print("Assignment Finished!")
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
