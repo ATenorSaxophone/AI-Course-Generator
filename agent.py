@@ -33,6 +33,12 @@ google_presentation_model = ChatGoogleGenerativeAI(
     temperature=0.7
 )
 
+google_video_model = ChatGoogleGenerativeAI(
+    model="veo-3.1-generate-preview",
+    api_key=os.environ["MY_GOOGLE_KEY"],
+    temperature=0.7
+)
+
 #Create search tool using DuckDuckGoSearchRun from langchain_community
 search_tool = DuckDuckGoSearchRun()
 
@@ -48,6 +54,9 @@ with open("system_prompts/presentation_workflow.md", "r", encoding="utf-8") as f
 
 with open("system_prompts/syllabus_workflow.md", "r", encoding="utf-8") as file:
     syllabus_prompt = file.read()
+
+with open("system_prompts/video_workflow.md", "r", encoding="utf-8") as file:
+    video_prompt = file.read()
 
 #Create google lesson agent
 google_lesson_agent = create_agent(
@@ -75,6 +84,12 @@ google_syllabus_agent = create_agent(
     model=google_lesson_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+)
+
+google_video_agent = create_agent(
+    model=google_video_model,   #Google Veo model
+    tools=[search_tool],    #Search tool for gathering dynamic information
+    system_prompt=video_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #get prompts from prompts.json file
@@ -122,8 +137,13 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        presentation_output = google_presentation_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"]}]})
+        presentation_output = google_presentation_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a presentation with 10 slides and detailed speaker notes for each slide."}]})
         print("Presentation Finished!")
+        print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+
+        video_output = google_video_agent.invoke({"messages": [{"role": "user", "content": presentation_output["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a video script with detailed descriptions of visuals and animations to include in the video."}]})
+        print("Video Finished!")
         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
