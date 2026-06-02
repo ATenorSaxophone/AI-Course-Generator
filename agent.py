@@ -137,15 +137,15 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        presentation_output = google_presentation_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a presentation with 10 slides and detailed speaker notes for each slide."}]})
-        print("Presentation Finished!")
-        print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
-        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+        # presentation_output = google_presentation_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a presentation with 10 slides and detailed speaker notes for each slide."}]})
+        # print("Presentation Finished!")
+        # print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+        # time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        video_output = google_video_agent.invoke({"messages": [{"role": "user", "content": presentation_output["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a video script with detailed descriptions of visuals and animations to include in the video."}]})
-        print("Video Finished!")
-        print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
-        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+        # video_output = google_video_agent.invoke({"messages": [{"role": "user", "content": presentation_output["messages"][1].content[0]["text"] + "\n\n" + "Turn this lesson into a video script with detailed descriptions of visuals and animations to include in the video."}]})
+        # print("Video Finished!")
+        # print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+        # time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
         quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_prompt["messages"][1].content[0]["text"] + "\n\n" + quiz_prompt}]})
         print("Quiz Finished!")
