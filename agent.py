@@ -1,14 +1,12 @@
 # Agent AI that creates Canvas Class about Human-Computer Interaction (HCI) using LangChain and Anthropic's Claude API. The agent will use the FastMCP server to create a Canvas Class with the specified parameters.
 import json
 import os
-import time
 
 from dotenv import load_dotenv
 import time, requests
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
-# from langchain.tools import tool
 from langchain_community.tools import DuckDuckGoSearchRun
 
 # Get .env variables
