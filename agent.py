@@ -191,6 +191,8 @@ for key, value in prompts.items():
         asset_id = asset_resp.json()["data"]["asset_id"]
         print(asset_id)
 
+
+#Create Video presentation for the lesson using the video agent and the user_lesson_prompt as the base content for the presentation. Use the asset_id from the uploaded presentation to create a video presentation using HeyGen's API. Poll the video generation status until it's complete, then download the video and save it as "video.mp4".
         vid_prompt_resp = requests.post(
             "https://api.heygen.com/v3/video-agents",
             headers={"X-Api-Key": HeyGenAPI_KEY},
