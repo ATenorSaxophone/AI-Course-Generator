@@ -262,12 +262,15 @@ with open("prompts.json", "r", encoding="utf-8") as file:
 
 
 
-lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 3"]["lesson prompt"]}]})
-with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_lesson.html", "w", encoding="utf-8") as file:
-    file.write(lesson_output["messages"][1].content[0]["text"])
-print("Lesson Finished!")
-print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+# lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 3"]["lesson prompt"]}]})
+# with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_lesson.html", "w", encoding="utf-8") as file:
+#     file.write(lesson_output["messages"][1].content[0]["text"])
+# print("Lesson Finished!")
+# print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+# time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+
+with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_lesson.html", "r", encoding="utf-8") as file:
+    lesson_output = file.read()
 
 #Create presentation for the lesson using the presentation agent and the user_lesson_prompt as the base content for the presentation.
 response = requests.post(
@@ -278,9 +281,9 @@ response = requests.post(
     "format": "presentation",
     "cardSplit": "auto",
     "exportAs": "pdf",
-    "inputText": lesson_output["messages"][1].content[0]["text"],
-    "additionalInstructions": "Make it visually engaging and informative, with a professional design suitable for marketing executives. Use relevant visuals and graphics to complement the content of the slides. Add speaker notes for each slide that provide additional context and information for the presenter. Ensure that the presentation effectively conveys the key points of the lesson and is easy to follow for the audience.",
-    "numCards": 12,
+    "inputText": lesson_output,
+    "additionalInstructions": presentation_prompt,
+    "numCards": 13,
     "themeId": "electric",
     "textOptions": {
         "amount": "detailed",
@@ -306,6 +309,7 @@ response = requests.post(
 data = response.json()
 print(data)
 timeout = 0
+x=1
 
 print(data.get("generationId"))
 
@@ -330,21 +334,22 @@ while True:
         print("Generation is taking too long. Timing out.")
         break
 
-    print("------------------------------")
+    print(f"-----------------------------{x}")
     print("Generation status:", status_response.json().get("status"))
     print("Status code:", status_response.status_code)
+    x += 1
     timeout += 5
 
-quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["quiz prompt"]}]})
-with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_quiz.html", "w", encoding="utf-8") as file:
-    file.write(quiz_output["messages"][1].content[0]["text"])
-print("Quiz Finished!")
-print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+# quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["quiz prompt"]}]})
+# with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_quiz.html", "w", encoding="utf-8") as file:
+#     file.write(quiz_output["messages"][1].content[0]["text"])
+# print("Quiz Finished!")
+# print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
+# time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["assignment prompt"]}]})
-with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_assignment.html", "w", encoding="utf-8") as file:
-    file.write(assignment_output["messages"][1].content[0]["text"])
-print("Assignment Finished!")
-print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+# assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["assignment prompt"]}]})
+# with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_assignment.html", "w", encoding="utf-8") as file:
+#     file.write(assignment_output["messages"][1].content[0]["text"])
+# print("Assignment Finished!")
+# print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
 time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
