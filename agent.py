@@ -262,8 +262,8 @@ with open("prompts.json", "r", encoding="utf-8") as file:
 
 
 
-lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 1"]["lesson prompt"]}]})
-with open(f"deliverables/{"lesson 1"}_lesson.html", "w", encoding="utf-8") as file:
+lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 3"]["lesson prompt"]}]})
+with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_lesson.html", "w", encoding="utf-8") as file:
     file.write(lesson_output["messages"][1].content[0]["text"])
 print("Lesson Finished!")
 print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
@@ -335,15 +335,15 @@ while True:
     print("Status code:", status_response.status_code)
     timeout += 5
 
-quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 1"]["lesson prompt"] + "\n\n" + prompts["lesson 1"]["quiz prompt"]}]})
-with open(f"deliverables/{"lesson 1"}_quiz.html", "w", encoding="utf-8") as file:
+quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["quiz prompt"]}]})
+with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_quiz.html", "w", encoding="utf-8") as file:
     file.write(quiz_output["messages"][1].content[0]["text"])
 print("Quiz Finished!")
 print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
 time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 1"]["lesson prompt"] + "\n\n" + prompts["lesson 1"]["assignment prompt"]}]})
-with open(f"deliverables/{"lesson 1"}_assignment.html", "w", encoding="utf-8") as file:
+assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output["messages"][1].content[0]["text"] + "\n\n" + prompts["lesson 3"]["assignment prompt"]}]})
+with open(f"deliverables/{"lesson 3"}/{"lesson 3"}_assignment.html", "w", encoding="utf-8") as file:
     file.write(assignment_output["messages"][1].content[0]["text"])
 print("Assignment Finished!")
 print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
