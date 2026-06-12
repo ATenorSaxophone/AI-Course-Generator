@@ -188,6 +188,7 @@ All generated images must be:
 ## Return the output in HTML format:
 HTML Output Requirements:
 - Use semantic HTML5 tags
+- Include style html elements to provide CSS to the html page.
 - Use , , , , , and appropriately
 - Maintain proper heading hierarchy ( → → )
 - Avoid inline CSS unless explicitly requested

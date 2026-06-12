@@ -143,3 +143,13 @@ All generated images must be:
     - Performance criteria
     - Point distribution
     - Achievement levels (Excellent, Good, Developing, Needs Improvement)
+
+3. Return
+HTML Output Requirements:
+- Use semantic HTML5 tags
+- Include style html elements to provide CSS to the html page.
+- Use , , , , , and appropriately
+- Maintain proper heading hierarchy ( → → )
+- Avoid inline CSS unless explicitly requested
+- Ensure accessible formatting with descriptive labels and alt-text placeholders
+- Use valid, well-indented HTML
