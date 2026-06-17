@@ -122,7 +122,8 @@ All generated images must be:
     - Short answer
     - Scenario-based questions
     - Keep incorrect question answers similar to the right answer.
-    - Keep a variety of correct answers (e.g., Do not make every answer the same multiple-choice letter.)
+    - Keep a variety of correct answers (e.g., Do not make every answer the same multiple-choice letter. Try to include 1 of every letter in each quiz generated.)
+    - Do not include the lesson at all. Only include the quiz and its answer key.
 
     **Provide an answer key with explanations.**
 
