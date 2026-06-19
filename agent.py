@@ -79,288 +79,236 @@ with open("prompts.json", "r", encoding="utf-8") as file:
 #     file.write(output["messages"][1].content[0]["text"])
 
 
-#Run agent with prompt inputs and print outputs
-# for key, value in prompts.items():
+# Run agent with prompt inputs and print outputs
+for key, value in prompts.items():
 
-#     if key == "lesson 15":
-#         final_project_prompt = value["final presentation prompt"]
-    
-#         final_project_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": final_project_prompt}]})
-#         print("Final Project Finished!")
-#         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
-#         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+    if key == "lesson 15":
+        final_project_prompt = prompts["lesson 15"]["final presentation prompt"]
 
-#         print(f"Final Project Output for {key}:\n{final_project_output}\n")
+        final_project_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": final_project_prompt}]})
+        with open("deliverables/lesson 15/final_project.html", "w", encoding="utf-8") as file:
+            file.write(final_project_output["messages"][1].content[0]["text"])
 
-#     elif key == "lesson 16":
-#         final_exam_prompt = value["final exam prompt"]
-    
-#         final_exam_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": final_exam_prompt}]})
-#         print("Final Exam Finished!")
-#         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
-#         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+        print("Final Project Finished!")
+        print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-#         print(f"Final Exam Output for {key}:\n{final_exam_output}\n")
+    elif key == "lesson 16":
+        final_exam_prompt = value["final exam prompt"]
+        lesson_content = ""
 
-#     else:
-#         user_lesson_prompt = value["lesson prompt"]
-#         user_quiz_prompt = value["quiz prompt"]
-#         user_assignment_prompt = value["assignment prompt"]
+        for lesson_num in range(1, 15):
+            with open(f"deliverables/{f"lesson {lesson_num}"}/{f"lesson {lesson_num}"}_lesson.html", "r", encoding="utf-8") as file:
+                lesson_content += "\n\n" + file.read()
+                print(f"Lesson {lesson_num} file read!")
 
-#         # Run the agent with the combined prompt
-#         lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": user_lesson_prompt}]})
-#         with open(f"{key}_lesson.html", "w", encoding="utf-8") as file:
-#             file.write(lesson_output["messages"][1].content[0]["text"])
-#         print("Lesson Finished!")
-#         print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
-#         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+        final_exam_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Content: {lesson_content} \n\n Prompt: {final_exam_prompt}"}]})
 
-#         #Create presentation for the lesson using the presentation agent and the user_lesson_prompt as the base content for the presentation.
-#         response = requests.post(
-#             "https://public-api.gamma.app/v1.0/generations",
-#             headers={"X-API-KEY": GammaAPI_KEY, "Content-Type": "application/json"},
-#             data=json.dumps({
-#             "textMode": "generate",
-#             "format": "presentation",
-#             "cardSplit": "auto",
-#             "exportAs": "pdf",
-#             "inputText": lesson_output["messages"][1].content[0]["text"],
-#             "additionalInstructions": "Make it visually engaging and informative, with a professional design suitable for marketing executives. Use relevant visuals and graphics to complement the content of the slides. Add speaker notes for each slide that provide additional context and information for the presenter. Ensure that the presentation effectively conveys the key points of the lesson and is easy to follow for the audience.",
-#             "numCards": 10,
-#             "themeId": "electric",
-#             "textOptions": {
-#                 "amount": "detailed",
-#                 "language": "en",
-#                 "tone": "professional",
-#                 "audience": "college students"
-#             },
-#             "imageOptions": {
-#                 "model": "flux-2-pro",
-#                 "source": "aiGenerated",
-#                 "style": "photorealistic, professional"
-#             },
-#             "cardOptions": {
-#                 "dimensions": "16x9",
-#             },
-#             "sharingOptions": {
-#                 "workspaceAccess": "view",
-#                 "externalAccess": "noAccess"
-#             },
-#             })
-#         )
+        with open("deliverables/lesson 16/final_exam.html", "w", encoding="utf-8") as file:
+            file.write(final_exam_output["messages"][1].content[0]["text"])
 
-#         data = response.json()
-#         print(data)
-#         timeout = 0
+        print("Final Exam Finished!")
+        print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-#         print(data.get("generationId"))
+    else:
+        user_lesson_prompt = value["lesson prompt"]
+        user_quiz_prompt = value["quiz prompt"]
+        user_assignment_prompt = value["assignment prompt"]
 
-#         while True:
-#             time.sleep(5)  # Wait for 5 seconds before polling again
+        # Run the agent with the combined prompt
+        lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": user_lesson_prompt}]})
+        with open(f"{key}_lesson.html", "w", encoding="utf-8") as file:
+            file.write(lesson_output["messages"][1].content[0]["text"])
+        print("Lesson Finished!")
+        print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-#             status_response = requests.get(
-#                 f"https://public-api.gamma.app/v1.0/generations/{data.get('generationId')}",
-#                 headers={"X-API-KEY": GammaAPI_KEY}
-#             )
+        #Create presentation for the lesson using the presentation agent and the user_lesson_prompt as the base content for the presentation.
+        response = requests.post(
+            "https://public-api.gamma.app/v1.0/generations",
+            headers={"X-API-KEY": GammaAPI_KEY, "Content-Type": "application/json"},
+            data=json.dumps({
+            "textMode": "generate",
+            "format": "presentation",
+            "cardSplit": "auto",
+            "exportAs": "pdf",
+            "inputText": lesson_output["messages"][1].content[0]["text"],
+            "additionalInstructions": "Make it visually engaging and informative, with a professional design suitable for marketing executives. Use relevant visuals and graphics to complement the content of the slides. Add speaker notes for each slide that provide additional context and information for the presenter. Ensure that the presentation effectively conveys the key points of the lesson and is easy to follow for the audience.",
+            "numCards": 10,
+            "themeId": "electric",
+            "textOptions": {
+                "amount": "detailed",
+                "language": "en",
+                "tone": "professional",
+                "audience": "college students"
+            },
+            "imageOptions": {
+                "model": "flux-2-pro",
+                "source": "aiGenerated",
+                "style": "photorealistic, professional"
+            },
+            "cardOptions": {
+                "dimensions": "16x9",
+            },
+            "sharingOptions": {
+                "workspaceAccess": "view",
+                "externalAccess": "noAccess"
+            },
+            })
+        )
 
-#             if status_response.status_code == 200 and status_response.json().get("status") == "completed":
-#                 with open("presentation.pdf", "wb") as file:
-#                     file.write(requests.get(status_response.json().get("exportUrl")).content)
-#                 break
+        data = response.json()
+        print(data)
+        timeout = 0
 
-#             elif status_response.status_code != 200:
-#                 print("Error checking generation status:", status_response.text)
-#                 break
+        print(data.get("generationId"))
+
+        while True:
+            time.sleep(5)  # Wait for 5 seconds before polling again
+
+            status_response = requests.get(
+                f"https://public-api.gamma.app/v1.0/generations/{data.get('generationId')}",
+                headers={"X-API-KEY": GammaAPI_KEY}
+            )
+
+            if status_response.status_code == 200 and status_response.json().get("status") == "completed":
+                with open("presentation.pdf", "wb") as file:
+                    file.write(requests.get(status_response.json().get("exportUrl")).content)
+                break
+
+            elif status_response.status_code != 200:
+                print("Error checking generation status:", status_response.text)
+                break
             
-#             elif status_response.status_code == 200 and timeout > 300:  # Timeout after 5 minutes
-#                 print("Generation is taking too long. Timing out.")
-#                 break
+            elif status_response.status_code == 200 and timeout > 300:  # Timeout after 5 minutes
+                print("Generation is taking too long. Timing out.")
+                break
 
-#             print("------------------------------")
-#             print("Generation status:", status_response.json().get("status"))
-#             print("Status code:", status_response.status_code)
-#             timeout += 5
+            print("------------------------------")
+            print("Generation status:", status_response.json().get("status"))
+            print("Status code:", status_response.status_code)
+            timeout += 5
 
+        if key != "lesson 8":
+            quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output + "\n\n" + user_quiz_prompt}]})
+            print("Quiz Finished!")
+            print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
+            time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-#         ## Upload presentation to HeyGen and get asset ID to use for video generation of each lesson's presentation video in the video workflow.
-#         with open("presentation.pdf", "rb") as file:
-#                     asset_resp = requests.post(
-#                         "https://api.heygen.com/v3/assets",
-#                         headers={"X-Api-Key": HeyGenAPI_KEY},
-#                         files={"file": ("presentation.pdf", file, "application/pdf")}
-#                     )
+        else:
+            for lesson_num in range(1, 9):
+                with open(f"deliverables/{"lesson {lesson_num}"}_lesson.html", "r", encoding="utf-8") as file:
+                    lesson_content += "\n\n" + file.read()
 
-#         asset_id = asset_resp.json()["data"]["asset_id"]
-#         print(asset_id)
+            quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output}\n\n{lesson_content}\n\nPrompt: {user_quiz_prompt}"}]})
+            with open(f"deliverables/{"lesson 8"}/{"lesson 8"}_quiz_iterated.html", "w", encoding="utf-8") as file:
+                file.write(quiz_output["messages"][1].content[0]["text"])
+            print("Quiz Finished!")
+            print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
 
+        assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output + "\n\n" + user_assignment_prompt}]})
+        print("Assignment Finished!")
+        print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+        time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-# #Create Video presentation for the lesson using the video agent and the user_lesson_prompt as the base content for the presentation. Use the asset_id from the uploaded presentation to create a video presentation using HeyGen's API. Poll the video generation status until it's complete, then download the video and save it as "video.mp4".
-#         vid_prompt_resp = requests.post(
-#             "https://api.heygen.com/v3/video-agents",
-#             headers={"X-Api-Key": HeyGenAPI_KEY},
-#             json={
-#                 "prompt": "Create a video presentation based on the content of the uploaded PDF presentation. The video should be engaging and informative, with visuals that complement the content of the slides. The video should be suitable for educational purposes and should effectively convey the key points of the lesson. Make it fun and engaging to watch for students learning about this topic.",
-#                 "orientation": "landscape",
-#                 "files": [
-#                     {"type": "asset_id", "asset_id": asset_id}
-#                 ]
-#             }
-#         )
-
-#         session_id = vid_prompt_resp.json()["data"]["session_id"]
-#         print(session_id)
-
-#         # Step 1: wait for video_id to be assigned
-#         video_id = None
-#         while not video_id:
-#             sess = requests.get(
-#                 f"https://api.heygen.com/v3/video-agents/{session_id}",
-#                 headers={"X-Api-Key": HeyGenAPI_KEY},
-#             ).json()["data"]
-#             video_id = sess.get("video_id")
-#             if not video_id:
-#                 time.sleep(5)
-
-#         print(video_id)
-
-#         # Step 2: poll video until complete
-#         while True:
-#             video = requests.get(
-#                 f"https://api.heygen.com/v3/videos/{video_id}",
-#                 headers={"X-Api-Key": HeyGenAPI_KEY},
-#             ).json()["data"]
-#             print(video["status"])
-#             if video["status"] in ("completed", "failed"):
-#                 break
-#             time.sleep(10)
-
-#         with requests.get(video["video_url"], stream=True) as r:
-#             r.raise_for_status()
-#             with open("video.mp4", "wb") as f:
-#                 for chunk in r.iter_content(chunk_size=8192):
-#                     f.write(chunk)
-
-#         print("Saved to video.mp4")
-
-#         if key != "lesson 8":
-#             quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output + "\n\n" + user_quiz_prompt}]})
-#             print("Quiz Finished!")
-#             print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
-#             time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
-
-#         else:
-#             for lesson_num in range(1, 9):
-#                 with open(f"deliverables/{"lesson {lesson_num}"}_lesson.html", "r", encoding="utf-8") as file:
-#                     lesson_content += "\n\n" + file.read()
-
-#             quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output}\n\n{lesson_content}\n\nPrompt: {user_quiz_prompt}"}]})
-#             with open(f"deliverables/{"lesson 8"}/{"lesson 8"}_quiz_iterated.html", "w", encoding="utf-8") as file:
-#                 file.write(quiz_output["messages"][1].content[0]["text"])
-#             print("Quiz Finished!")
-#             print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
-
-#         assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": lesson_output + "\n\n" + user_assignment_prompt}]})
-#         print("Assignment Finished!")
-#         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
-#         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
-
-#         print(f"Readings Output for {key}:\n{lesson_output}\n")
-#         print(f"Quiz Output for {key}:\n{quiz_output}\n")
-#         print(f"Assignment Output for {key}:\n{assignment_output}\n")
+        print(f"Readings Output for {key}:\n{lesson_output}\n")
+        print(f"Quiz Output for {key}:\n{quiz_output}\n")
+        print(f"Assignment Output for {key}:\n{assignment_output}\n")
 
 
 
 
 
 
-lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 12"]["lesson prompt"]}]})
-with open(f"deliverables/{"lesson 12"}/{"lesson 12"}_lesson.html", "w", encoding="utf-8") as file:
-    file.write(lesson_output["messages"][1].content[0]["text"])
-print("Lesson Finished!")
-print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+# lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 10"]["lesson prompt"]}]})
+# with open(f"deliverables/{"lesson 10"}/{"lesson 10"}_lesson.html", "w", encoding="utf-8") as file:
+#     file.write(lesson_output["messages"][1].content[0]["text"])
+# print("Lesson Finished!")
+# print("Waiting for 60 seconds before invoking the quiz and assignment prompts to avoid hitting rate limits...")
+# time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
 # Create presentation for the lesson using the presentation agent and the user_lesson_prompt as the base content for the presentation.
-response = requests.post(
-    "https://public-api.gamma.app/v1.0/generations",
-    headers={"X-API-KEY": GammaAPI_KEY, "Content-Type": "application/json"},
-    data=json.dumps({
-    "textMode": "generate",
-    "format": "presentation",
-    "cardSplit": "auto",
-    "exportAs": "pdf",
-    "inputText": lesson_output["messages"][1].content[0]["text"],
-    "additionalInstructions": presentation_prompt,
-    "numCards": 13,
-    "themeId": "electric",
-    "textOptions": {
-        "amount": "detailed",
-        "language": "en",
-        "tone": "professional",
-        "audience": "college students"
-    },
-    "imageOptions": {
-        "model": "flux-2-pro",
-        "source": "aiGenerated",
-        "style": "photorealistic, professional"
-    },
-    "cardOptions": {
-        "dimensions": "16x9",
-    },
-    "sharingOptions": {
-        "workspaceAccess": "view",
-        "externalAccess": "noAccess"
-    },
-    })
-)
+# response = requests.post(
+#     "https://public-api.gamma.app/v1.0/generations",
+#     headers={"X-API-KEY": GammaAPI_KEY, "Content-Type": "application/json"},
+#     data=json.dumps({
+#     "textMode": "generate",
+#     "format": "presentation",
+#     "cardSplit": "auto",
+#     "exportAs": "pdf",
+#     "inputText": lesson_output["messages"][1].content[0]["text"],
+#     "additionalInstructions": presentation_prompt,
+#     "numCards": 13,
+#     "themeId": "electric",
+#     "textOptions": {
+#         "amount": "detailed",
+#         "language": "en",
+#         "tone": "professional",
+#         "audience": "college students"
+#     },
+#     "imageOptions": {
+#         "model": "flux-2-pro",
+#         "source": "aiGenerated",
+#         "style": "photorealistic, professional"
+#     },
+#     "cardOptions": {
+#         "dimensions": "16x9",
+#     },
+#     "sharingOptions": {
+#         "workspaceAccess": "view",
+#         "externalAccess": "noAccess"
+#     },
+#     })
+# )
 
-data = response.json()
-print(data)
-timeout = 0
-x=1
+# data = response.json()
+# print(data)
+# timeout = 0
+# x=1
 
-print(data.get("generationId"))
+# print(data.get("generationId"))
 
-while True:
-    time.sleep(5)  # Wait for 5 seconds before polling again
+# while True:
+#     time.sleep(5)  # Wait for 5 seconds before polling again
 
-    status_response = requests.get(
-        f"https://public-api.gamma.app/v1.0/generations/{data.get('generationId')}",
-        headers={"X-API-KEY": GammaAPI_KEY}
-    )
+#     status_response = requests.get(
+#         f"https://public-api.gamma.app/v1.0/generations/{data.get('generationId')}",
+#         headers={"X-API-KEY": GammaAPI_KEY}
+#     )
 
-    if status_response.status_code == 200 and status_response.json().get("status") == "completed":
-        with open(f"deliverables/{"lesson 12"}/{"lesson 12"}_presentation.pdf", "wb") as file:
-            file.write(requests.get(status_response.json().get("exportUrl")).content)
-        break
+#     if status_response.status_code == 200 and status_response.json().get("status") == "completed":
+#         with open(f"deliverables/{"lesson 1"}/{"lesson 1"}_presentation.pdf", "wb") as file:
+#             file.write(requests.get(status_response.json().get("exportUrl")).content)
+#         break
 
-    elif status_response.status_code != 200:
-        print("Error checking generation status:", status_response.text)
-        break
+#     elif status_response.status_code != 200:
+#         print("Error checking generation status:", status_response.text)
+#         break
     
-    elif status_response.status_code == 200 and timeout > 300:  # Timeout after 5 minutes
-        print("Generation is taking too long. Timing out.")
-        break
+#     elif status_response.status_code == 200 and timeout > 300:  # Timeout after 5 minutes
+#         print("Generation is taking too long. Timing out.")
+#         break
 
-    print(f"-----------------------------{x}")
-    print("Generation status:", status_response.json().get("status"))
-    print("Status code:", status_response.status_code)
-    x += 1
-    timeout += 5
+#     print(f"-----------------------------{x}")
+#     print("Generation status:", status_response.json().get("status"))
+#     print("Status code:", status_response.status_code)
+#     x += 1
+#     timeout += 5
 
-with open(f"deliverables/{"lesson 12"}/{"lesson 12"}_lesson.html", "r", encoding="utf-8") as file:
-    lesson_output = file.read()
+# with open(f"deliverables/lesson 9/lesson 9_lesson.html", "r", encoding="utf-8") as file:
+#     lesson_output = f"\n\n {file.read()}"
 
-quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output} \n\n {prompts['lesson 12']['quiz prompt']}"}]})
-with open(f"deliverables/{"lesson 12"}/{"lesson 12"}_quiz.html", "w", encoding="utf-8") as file:
-    file.write(quiz_output["messages"][1].content[0]["text"])
-print("Quiz Finished!")
-print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+# quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output} \n\n {prompts['lesson 9']['quiz prompt']}"}]})
+# with open(f"deliverables/{"lesson 9"}/{"lesson 9"}_quiz.html", "w", encoding="utf-8") as file:
+#     file.write(quiz_output["messages"][1].content[0]["text"])
+# print("Quiz Finished!")
+# print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
+# time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output} \n\n {prompts['lesson 12']['assignment prompt']}"}]})
-with open(f"deliverables/{"lesson 12"}/{"lesson 12"}_assignment.html", "w", encoding="utf-8") as file:
-    file.write(assignment_output["messages"][1].content[0]["text"])
-print("Assignment Finished!")
-print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+# assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output["messages"][1].content[0]["text"]} \n\n {prompts['lesson 14']['assignment prompt']}"}]})
+# with open(f"deliverables/{"lesson 14"}/{"lesson 14"}_assignment.html", "w", encoding="utf-8") as file:
+#     file.write(assignment_output["messages"][1].content[0]["text"])
+# print("Assignment Finished!")
+# print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+# time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
