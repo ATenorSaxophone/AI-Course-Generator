@@ -16,14 +16,8 @@ HeyGenAPI_KEY = os.getenv("MY_HEYGEN_KEY")
 GammaAPI_KEY = os.getenv("MY_GAMMA_KEY")
 
 #Create Google AI Studio model
-google_lesson_model = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    api_key=os.environ["MY_GOOGLE_KEY"],
-    temperature=0.1
-)
-
-google_quiz_model = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+google_gemini_model = ChatGoogleGenerativeAI(
+    model="gemini-3.5-flash",
     api_key=os.environ["MY_GOOGLE_KEY"],
     temperature=0.1
 )
@@ -49,21 +43,21 @@ with open("system_prompts/video_workflow.md", "r", encoding="utf-8") as file:
 
 #Create google lesson agent
 google_lesson_agent = create_agent(
-    model=google_lesson_model,   #Google Gemini model
+    model=google_gemini_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=lesson_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create google quiz and assignmentagent
 google_quiz_assignment_agent = create_agent(
-    model=google_quiz_model,   #Google Gemini model
+    model=google_gemini_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=quiz_assignment_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create syllabus agent for the course.
 google_syllabus_agent = create_agent(
-    model=google_lesson_model,   #Google Gemini model
+    model=google_gemini_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
@@ -212,6 +206,31 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
+        lesson_content = ""
+        assignment_content = ""
+
+        for lesson_num in range(1,15):
+            # with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
+            #     lesson_content += f"\n\n{file.read()}"
+            #     print(f"read file lesson {lesson_num}")
+            
+            if(lesson_num > 5):
+                with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+                    assignment_content += f"\n\n{file.read()}"
+                    print(f"read file assignment {lesson_num}")
+            
+            else:
+                with open(f"deliverables/lesson {lesson_num}/Iterated/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+                    assignment_content += f"\n\n{file.read()}"
+                    print(f"read file assignment {lesson_num}")
+
+        syllabus_output = google_syllabus_agent.invoke({"messages": [{"role": "user", "content": f"{assignment_content}\n{prompts["syllabus"]}"}]})
+        with open(f"deliverables/syllabus/syllabus.html", "w", encoding="utf-8") as file:
+            file.write(syllabus_output["messages"][1].content[0]["text"])
+        print("Syllabus finished")
+        print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+        time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
+
         print(f"Readings Output for {key}:\n{lesson_output}\n")
         print(f"Quiz Output for {key}:\n{quiz_output}\n")
         print(f"Assignment Output for {key}:\n{assignment_output}\n")
@@ -299,16 +318,50 @@ for key, value in prompts.items():
 # with open(f"deliverables/lesson 9/lesson 9_lesson.html", "r", encoding="utf-8") as file:
 #     lesson_output = f"\n\n {file.read()}"
 
-# quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output} \n\n {prompts['lesson 9']['quiz prompt']}"}]})
+# lesson_output = ""
+
+# with open(f"deliverables/lesson 4/lesson 4_lesson.html", "r", encoding="utf-8") as file:
+#     lesson_output = file.read()
+#     print("read lesson 4!")
+
+# quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output["messages"][1].content[0]["text"]} \n\n {prompts['lesson 9']['quiz prompt']}"}]})
 # with open(f"deliverables/{"lesson 9"}/{"lesson 9"}_quiz.html", "w", encoding="utf-8") as file:
 #     file.write(quiz_output["messages"][1].content[0]["text"])
 # print("Quiz Finished!")
 # print("Waiting for 60 seconds before invoking the assignment prompt to avoid hitting rate limits...")
 # time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-# assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output["messages"][1].content[0]["text"]} \n\n {prompts['lesson 14']['assignment prompt']}"}]})
-# with open(f"deliverables/{"lesson 14"}/{"lesson 14"}_assignment.html", "w", encoding="utf-8") as file:
+# assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"{lesson_output} \n\n {prompts['lesson 4']['assignment prompt']}"}]})
+# with open(f"deliverables/{"lesson 4"}/{"lesson 4"}_assignment.html", "w", encoding="utf-8") as file:
 #     file.write(assignment_output["messages"][1].content[0]["text"])
 # print("Assignment Finished!")
 # print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
 # time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
+
+
+
+
+# lesson_content = ""
+# assignment_content = ""
+
+# for lesson_num in range(1,15):
+#     # with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
+#     #     lesson_content += f"\n\n{file.read()}"
+#     #     print(f"read file lesson {lesson_num}")
+    
+#     if(lesson_num > 5):
+#         with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+#             assignment_content += f"\n\n{file.read()}"
+#             print(f"read file assignment {lesson_num}")
+    
+#     else:
+#         with open(f"deliverables/lesson {lesson_num}/Iterated/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+#             assignment_content += f"\n\n{file.read()}"
+#             print(f"read file assignment {lesson_num}")
+
+# syllabus_output = google_syllabus_agent.invoke({"messages": [{"role": "user", "content": f"{assignment_content}\n{prompts["syllabus"]}"}]})
+# with open(f"deliverables/syllabus/syllabus.html", "w", encoding="utf-8") as file:
+#     file.write(syllabus_output["messages"][1].content[0]["text"])
+# print("Syllabus finished")
+# print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+# time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
