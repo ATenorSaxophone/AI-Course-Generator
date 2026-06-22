@@ -155,3 +155,13 @@ Constraints:
 - Do NOT invent specific institutional policies unless generic.
 - If information is missing, make reasonable academic assumptions and clearly label them as assumptions.
 - Keep content realistic for a semester-long course (12-15 weeks).
+
+## Return the output in HTML format:
+HTML Output Requirements:
+- Use semantic HTML5 tags
+- Include style html elements to provide CSS to the html page.
+- Use , , , , , and appropriately
+- Maintain proper heading hierarchy ( → → )
+- Avoid inline CSS unless explicitly requested
+- Ensure accessible formatting with descriptive labels and alt-text placeholders
+- Use valid, well-indented HTML
