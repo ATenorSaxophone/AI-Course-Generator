@@ -73,7 +73,7 @@ with open("prompts.json", "r", encoding="utf-8") as file:
 #     file.write(output["messages"][1].content[0]["text"])
 
 
-# Run agent with prompt inputs and print outputs
+# # Run agent with prompt inputs and print outputs
 for key, value in prompts.items():
 
     if key == "lesson 15":
@@ -206,34 +206,47 @@ for key, value in prompts.items():
         print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
         time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
 
-        lesson_content = ""
-        assignment_content = ""
+    lesson_content = ""
+    assignment_content = ""
 
-        for lesson_num in range(1,15):
-            # with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
-            #     lesson_content += f"\n\n{file.read()}"
-            #     print(f"read file lesson {lesson_num}")
-            
-            if(lesson_num > 5):
-                with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
-                    assignment_content += f"\n\n{file.read()}"
-                    print(f"read file assignment {lesson_num}")
-            
-            else:
-                with open(f"deliverables/lesson {lesson_num}/Iterated/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
-                    assignment_content += f"\n\n{file.read()}"
-                    print(f"read file assignment {lesson_num}")
+    for lesson_num in range(1,15):
+        # with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
+        #     lesson_content += f"\n\n{file.read()}"
+        #     print(f"read file lesson {lesson_num}")
+        
+        if(lesson_num > 5):
+            with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+                assignment_content += f"\n\n{file.read()}"
+                print(f"read file assignment {lesson_num}")
+        
+        else:
+            with open(f"deliverables/lesson {lesson_num}/Iterated/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
+                assignment_content += f"\n\n{file.read()}"
+                print(f"read file assignment {lesson_num}")
 
-        syllabus_output = google_syllabus_agent.invoke({"messages": [{"role": "user", "content": f"{assignment_content}\n{prompts["syllabus"]}"}]})
-        with open(f"deliverables/syllabus/syllabus.html", "w", encoding="utf-8") as file:
-            file.write(syllabus_output["messages"][1].content[0]["text"])
-        print("Syllabus finished")
-        print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
-        time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
+    syllabus_output = google_syllabus_agent.invoke({"messages": [{"role": "user", "content": f"{assignment_content}\n{prompts["syllabus"]}"}]})
+    with open(f"deliverables/syllabus/syllabus.html", "w", encoding="utf-8") as file:
+        file.write(syllabus_output["messages"][1].content[0]["text"])
+    print("Syllabus finished")
+    print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+    time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
 
-        print(f"Readings Output for {key}:\n{lesson_output}\n")
-        print(f"Quiz Output for {key}:\n{quiz_output}\n")
-        print(f"Assignment Output for {key}:\n{assignment_output}\n")
+    # Creates a Agreement form for the first lesson, as the assignment requires a syllabus agreement form to be "signed".
+    syllabus = ""
+
+    with open("deliverables/syllabus/syllabus.html", "r", encoding="utf-8") as file:
+        syllabus = file.read()
+
+    syllabus_quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Syllabus: {syllabus}\n\n{prompts["syllabus"]["agreement form"]}"}]})
+    with open("deliverables/syllabus/syllabus_agreement_form.html", "w", encoding="utf-8") as file:
+        file.write(syllabus_quiz_output["messages"][1].content[0]["text"])
+    print("Agreement form finished!")
+    print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+    time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
+
+    print(f"Readings Output for {key}:\n{lesson_output}\n")
+    print(f"Quiz Output for {key}:\n{quiz_output}\n")
+    print(f"Assignment Output for {key}:\n{assignment_output}\n")
 
 
 
@@ -340,7 +353,7 @@ for key, value in prompts.items():
 
 
 
-
+# # Creates a syllabus using the assignments generated from each lesson. This allows the AI to get enough information to see what each week is about, as well as create a timeline for when each assignment is due when.
 # lesson_content = ""
 # assignment_content = ""
 
@@ -363,5 +376,19 @@ for key, value in prompts.items():
 # with open(f"deliverables/syllabus/syllabus.html", "w", encoding="utf-8") as file:
 #     file.write(syllabus_output["messages"][1].content[0]["text"])
 # print("Syllabus finished")
+# print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
+# time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
+
+
+# # Creates a Agreement form for the first lesson, as the assignment requires a syllabus agreement form to be "signed".
+# syllabus = ""
+
+# with open("deliverables/syllabus/syllabus.html", "r", encoding="utf-8") as file:
+#     syllabus = file.read()
+
+# syllabus_quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Syllabus: {syllabus}\n\n{prompts["syllabus"]["agreement form"]}"}]})
+# with open("deliverables/syllabus/syllabus_agreement_form.html", "w", encoding="utf-8") as file:
+#     file.write(syllabus_quiz_output["messages"][1].content[0]["text"])
+# print("Agreement form finished!")
 # print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
 # time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
