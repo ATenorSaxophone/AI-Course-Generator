@@ -66,14 +66,8 @@ google_syllabus_agent = create_agent(
 with open("prompts.json", "r", encoding="utf-8") as file:
     prompts = json.load(file)
 
-#1 lesson test code
-# output = google_chat_agent.invoke({"messages": [{"role": "user", "content": prompts["lesson 1"]["lesson prompt"]}]})
-# print(output)
-# with open("out.html", "w", encoding="utf-8") as file:
-#     file.write(output["messages"][1].content[0]["text"])
 
-
-# # Run agent with prompt inputs and print outputs
+# Run agent with prompt inputs and print outputs
 for key, value in prompts.items():
 
     if key == "lesson 15":
@@ -210,9 +204,9 @@ for key, value in prompts.items():
     assignment_content = ""
 
     for lesson_num in range(1,15):
-        # with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
-        #     lesson_content += f"\n\n{file.read()}"
-        #     print(f"read file lesson {lesson_num}")
+        with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
+            lesson_content += f"\n\n{file.read()}"
+            print(f"read file lesson {lesson_num}")
         
         if(lesson_num > 5):
             with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "r", encoding="utf-8") as file:
@@ -386,6 +380,7 @@ for key, value in prompts.items():
 # with open("deliverables/syllabus/syllabus.html", "r", encoding="utf-8") as file:
 #     syllabus = file.read()
 
+# # Creates a quiz that works as a syllabus agreement form
 # syllabus_quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Syllabus: {syllabus}\n\n{prompts["syllabus"]["agreement form"]}"}]})
 # with open("deliverables/syllabus/syllabus_agreement_form.html", "w", encoding="utf-8") as file:
 #     file.write(syllabus_quiz_output["messages"][1].content[0]["text"])
