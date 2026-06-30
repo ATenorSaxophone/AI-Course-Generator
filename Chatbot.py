@@ -19,7 +19,7 @@ GammaAPI_KEY = os.getenv("MY_GAMMA_KEY")
 
 #Create Google AI Studio model
 google_gemini_model = ChatGoogleGenerativeAI(
-    model="gemini-3.5-flash",
+    model="gemini-2.5-flash",
     api_key=os.environ["MY_GOOGLE_KEY"],
     temperature=0.1
 )
@@ -67,6 +67,8 @@ def gen_lesson(prompt: str, lesson_num: int) -> str:
 
     with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "w", encoding="utf-8") as file:
         file.write(lesson_output["messages"][1].content[0]["text"])
+    print("Taking 60 seconds to avoid rate limits!")
+    time.sleep(60)
 
     return f"Finished Lesson {lesson_num} Generation!\n60 Seconds will be taken to avoid hitting rate limits..."
 
@@ -88,6 +90,8 @@ def gen_quiz(prompt: str, lesson_num: int, context: str=None) -> str:
 
     with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_quiz.html", "w", encoding="utf-8") as file:
         file.write(quiz_output["messages"][1].content[0]["text"])
+    print("Taking 60 seconds to avoid rate limits!")
+    time.sleep(60)
 
     return f"Finished Quiz {lesson_num} Generation!\n60 Seconds will be taken to avoid hitting rate limits"
 
@@ -109,6 +113,8 @@ def gen_assignment(prompt: str, lesson_num: int, context: str=None) -> str:
 
     with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "w", encoding="utf-8") as file:
         file.write(assignment_output["messages"][1].content[0]["text"])
+    print("Taking 60 seconds to avoid rate limits!")
+    time.sleep(60)
 
     return f"Assignment {lesson_num} generated!\n60 Seconds will be taken to avoid hitting rate limits"
 
@@ -173,6 +179,8 @@ def gen_presentation(lesson_num: int, context: str) -> str:
         if status_response.status_code == 200 and status_response.json().get("status") == "completed":
             with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_presentation.pdf", "wb") as file:
                 file.write(requests.get(status_response.json().get("exportUrl")).content)
+            print("Taking 60 seconds to avoid rate limits!")
+            time.sleep(60)
             return f"Presentation Generated!\n60 Seconds will be taken to avoid hitting rate limits"
 
         elif status_response.status_code != 200:
@@ -236,9 +244,8 @@ universal_agent = create_agent(
 )
 
 user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment)")
-user_lesson_num = input("What lesson number is this lesson?")
 
-universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"Lesson Number: {user_lesson_num}\n\nUser Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE."}]})
+universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE."}]})
 print("Deliverable Completed!")
 print("Taking 60 Seconds to avoid hitting rate limits!")
 time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
