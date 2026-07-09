@@ -11,6 +11,11 @@ from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_community.tools import DuckDuckGoSearchRun
 
+from google import genai
+from openai import OpenAI
+
+# from TTS.api import TTS
+
 # Get .env variables
 load_dotenv()
 google_key = os.getenv("MY_GOOGLE_KEY")
@@ -35,97 +40,143 @@ search_tool = DuckDuckGoSearchRun()
 
 # Tools for getting context for prompts.
 @tool
-def get_lesson(lesson_num: int) -> str:
+def get_lesson(lesson_name: int) -> str:
     """Get a HTML lesson page to use as context for a prompt to generate quizzes or assignments. This tool will NEVER use the get_lesson tool.
     
     Args:
-        lesson_num: The number of the lesson"""
+        lesson_name: The name of the lesson"""
     print("entered get lesson!")
 
     lesson = ""
-    with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "r", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_lesson.html", "r", encoding="utf-8") as file:
         lesson = file.read()
 
     return lesson
 
+@tool
+def get_presentation_script(lesson_name: int) -> str:
+    """Get the PDF presentation for a lesson to use as context to turn into a script for a video. DO NOT USE if user does not specify to.
+    
+    Args:
+        lesson_name: the name of the lesson"""
+    
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf", "rb") as file:
+        presentation = file.read()
+
+    return universal_agent.invoke({"messages": [{"role": "user", "content": f"Please summarize the following presentation into a script for a video. The length of the script should be around 15 minutes:\n{presentation}"}]})["messages"][1].content[0]["text"]
+
+@tool
+def gen_audio(lesson_name: int) -> str:
+    """Use TTS to generate an audio file from a script for a video. DO NOT USE if user does not specify to.
+    
+    Args:
+        lesson_name: The name of the lesson"""
+    
+    print("entered audio tool!")
+    upload = genai.Client(api_key=os.environ["MY_GOOGLE_KEY"])
+
+    myfile = upload.files.upload(file=f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf")
+
+    script = upload.interactions.create(
+        model="gemini-2.5-flash",
+        input=[
+            {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio. Do not include any other characters other than letters and punctuation."},
+            {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
+        ]
+    )
+
+    upload.files.delete(name=myfile.name)
+
+    generation = OpenAI(
+        base_url="http://localhost:8880/v1", api_key="not-needed"
+    )
+
+    with generation.audio.speech.with_streaming_response.create(
+        model="kokoro",
+        voice="af_sky+af_bella", #single or multiple voicepack combo
+        input= script.output_text
+        ) as response:
+        folder_path = Path(f"deliverables/lesson {lesson_name}")
+        folder_path.mkdir(parents=True, exist_ok=True)
+        response.stream_to_file(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_audio.mp3")
 
 # Tools for generating lessons, assignments, and quizzes.
 @tool
-def gen_lesson(prompt: str, lesson_num: int) -> str:
-    """Use Google Gemini to generate a Lesson document in HTML using the provided template within the system prompt.
+def gen_lesson(prompt: str, lesson_name: int) -> str:
+    """Use Google Gemini to generate a Lesson document in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
-        lesson_num: The number of the lesson
+        lesson_name: The name of the lesson
         context: An OPTIONAL parameter that is referenced upon to determine generation content"""
     
     print("entered lesson tool!")
-    lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_num}\nPrompt: {prompt}"}]})
+    lesson_output = google_lesson_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}"}]})
 
-    folder_path = Path(f"deliverables/lesson {lesson_num}")
+    folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
 
-    with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_lesson.html", "w", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_lesson.html", "w", encoding="utf-8") as file:
         file.write(lesson_output["messages"][1].content[0]["text"])
     print("Taking 60 seconds to avoid rate limits!")
     time.sleep(60)
 
-    return f"Finished Lesson {lesson_num} Generation!\n60 Seconds will be taken to avoid hitting rate limits..."
+    return f"Finished Lesson {lesson_name} Generation!\n60 Seconds will be taken to avoid hitting rate limits..."
 
 
 @tool
-def gen_quiz(prompt: str, lesson_num: int, context: str=None) -> str:
-    """Use Google Gemini to generate a Quiz document in HTML using the provided template within the system prompt. This tool should run if user answers Yes/Y to Context Preference.
+def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
+    """Use Google Gemini to generate a Quiz document in HTML using the provided template within the system prompt. This tool should run if user answers Yes/Y to Context Preference. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
-        lesson_num: The number of the lesson
+        lesson_name: The name of the lesson
         context: An OPTIONAL parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
     
     print("entered quiz tool!")
-    quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_num}\nPrompt: {prompt}\nContext: {context}"}]})
+    quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
 
-    folder_path = Path(f"deliverables/lesson {lesson_num}")
+    folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
 
-    with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_quiz.html", "w", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_quiz.html", "w", encoding="utf-8") as file:
         file.write(quiz_output["messages"][1].content[0]["text"])
     print("Taking 60 seconds to avoid rate limits!")
     time.sleep(60)
 
-    return f"Finished Quiz {lesson_num} Generation!\n60 Seconds will be taken to avoid hitting rate limits"
+    return f"Finished Quiz {lesson_name} Generation!\n60 Seconds will be taken to avoid hitting rate limits"
 
 
 @tool
-def gen_assignment(prompt: str, lesson_num: int, context: str=None) -> str:
-    """Use Google Gemini to generate a Assignment document in HTML using the provided template within the system prompt.
+def gen_assignment(prompt: str, lesson_name: int, context: str=None) -> str:
+    """Use Google Gemini to generate a Assignment document in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
-        lesson_num: The number of the lesson
+        lesson_name: The name of the lesson
         context: An OPTIONAL parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
 
     print("entered assignment tool!")
-    assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_num}\nPrompt: {prompt}\nContext: {context}"}]})
+    assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
 
-    folder_path = Path(f"deliverables/lesson {lesson_num}")
+    folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
 
-    with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_assignment.html", "w", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_assignment.html", "w", encoding="utf-8") as file:
         file.write(assignment_output["messages"][1].content[0]["text"])
     print("Taking 60 seconds to avoid rate limits!")
     time.sleep(60)
 
-    return f"Assignment {lesson_num} generated!\n60 Seconds will be taken to avoid hitting rate limits"
+    return f"Assignment {lesson_name} generated!\n60 Seconds will be taken to avoid hitting rate limits"
 
 
 @tool
-def gen_presentation(lesson_num: int, context: str) -> str:
-    """Use Gamma AI to generated presentations in a .pdf file. The AI should use the get_lesson tool to get the context needed to generate the presentations.
+def gen_presentation(lesson_name: int, context: str) -> str:
+    """Use Gamma AI to generated presentations in a .pdf file. The AI should use the get_lesson tool to get the context needed to generate the presentations. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
-        lesson_num: The number of the lesson
+        lesson_name: The name of the lesson
         context: A parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
     print("entered presentation tool!")
     response = requests.post(
@@ -136,7 +187,7 @@ def gen_presentation(lesson_num: int, context: str) -> str:
         "format": "presentation",
         "cardSplit": "auto",
         "exportAs": "pdf",
-        "inputText": context,
+        "inputText": f"lesson name: {lesson_name}\ncontext: {context}",
         "additionalInstructions": presentation_prompt,
         "numCards": 13,
         "themeId": "electric",
@@ -177,10 +228,8 @@ def gen_presentation(lesson_num: int, context: str) -> str:
         )
 
         if status_response.status_code == 200 and status_response.json().get("status") == "completed":
-            with open(f"deliverables/lesson {lesson_num}/lesson {lesson_num}_presentation.pdf", "wb") as file:
+            with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf", "wb") as file:
                 file.write(requests.get(status_response.json().get("exportUrl")).content)
-            print("Taking 60 seconds to avoid rate limits!")
-            time.sleep(60)
             return f"Presentation Generated!\n60 Seconds will be taken to avoid hitting rate limits"
 
         elif status_response.status_code != 200:
@@ -239,7 +288,7 @@ google_syllabus_agent = create_agent(
 #Create Universal Agent for the course.
 universal_agent = create_agent(
     model=google_unverisal_model,
-    tools=[get_lesson, gen_lesson, gen_quiz, gen_assignment, gen_presentation], #Tool for generating HTML lessons
+    tools=[get_lesson, gen_lesson, gen_quiz, gen_assignment, gen_presentation, gen_audio], #Tool for generating HTML lessons
     system_prompt=universal_prompt #Instructions for the agent on how to create the desired deliverables from the user.
 )
 
@@ -247,5 +296,3 @@ user_prompt = input("What deliverable do you want to generate? (Lesson, Presenta
 
 universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE."}]})
 print("Deliverable Completed!")
-print("Taking 60 Seconds to avoid hitting rate limits!")
-time.sleep(60)  # Add a short delay between calls to avoid hitting rate limits
