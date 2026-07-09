@@ -80,7 +80,7 @@ def gen_audio(lesson_name: int) -> str:
     script = upload.interactions.create(
         model="gemini-2.5-flash",
         input=[
-            {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio. Do not include any other characters other than letters and punctuation."},
+            {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio and no more than 30 minutes of audio. The final output should only include letters and punctuation (periods, commas, apostrophe, etc.). The final output should not include characters like asterisks."},
             {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
         ]
     )
