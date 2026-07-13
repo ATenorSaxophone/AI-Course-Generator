@@ -416,28 +416,28 @@ with open("prompts.json", "r", encoding="utf-8") as file:
 # print("Waiting for 60 seconds before moving on to the next lesson to avoid hitting rate limits...")
 # time.sleep(60) # Add a short delay between calls to avoid hitting rate limits
 
-client = genai.Client(api_key=os.environ["MY_GOOGLE_KEY_2"])
-print(f"client key: ", f"api_key: {os.environ['MY_GOOGLE_KEY']}")
+# client = genai.Client(api_key=os.environ["MY_GOOGLE_KEY_2"])
+# print(f"client key: ", f"api_key: {os.environ['MY_GOOGLE_KEY']}")
 
-myfile = client.files.upload(file="deliverables/lesson 1/lesson 1_presentation.pdf")
+# myfile = client.files.upload(file="deliverables/lesson 1/lesson 1_presentation.pdf")
 
-interaction = client.interactions.create(
-    model="gemini-2.5-flash",
-    input=[
-        {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio. Do not include any other characters other than letters and punctuation."},
-        {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
-    ]
-)
+# interaction = client.interactions.create(
+#     model="gemini-2.5-flash",
+#     input=[
+#         {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio. Do not include any other characters other than letters and punctuation."},
+#         {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
+#     ]
+# )
 
-client.files.delete(name=myfile.name)
+# client.files.delete(name=myfile.name)
 
-client = OpenAI(
-    base_url="http://localhost:8880/v1", api_key="not-needed"
-)
+# client = OpenAI(
+#     base_url="http://localhost:8880/v1", api_key="not-needed"
+# )
 
-with client.audio.speech.with_streaming_response.create(
-    model="kokoro",
-    voice="af_sky+af_bella", #single or multiple voicepack combo
-    input= interaction.output_text
-    ) as response:
-      response.stream_to_file("output.mp3")
+# with client.audio.speech.with_streaming_response.create(
+#     model="kokoro",
+#     voice="af_sky+af_bella", #single or multiple voicepack combo
+#     input= interaction.output_text
+#     ) as response:
+#       response.stream_to_file("output.mp3")
