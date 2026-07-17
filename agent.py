@@ -29,7 +29,7 @@ google_gemini_model = ChatGoogleGenerativeAI(
 
 google_audio_model = ChatGoogleGenerativeAI(
     model="gemini-3.1-flash-live-preview",
-    api_key=os.environ["MY_GOOGLE_KEY_2"],
+    api_key=os.environ["MY_GOOGLE_KEY"],
     temperature=0.1
 )
 
