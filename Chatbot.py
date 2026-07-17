@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import time, requests
 
 from pathlib import Path
+import subprocess
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
@@ -19,7 +20,6 @@ from openai import OpenAI
 # Get .env variables
 load_dotenv()
 google_key = os.getenv("MY_GOOGLE_KEY")
-HeyGenAPI_KEY = os.getenv("MY_HEYGEN_KEY")
 GammaAPI_KEY = os.getenv("MY_GAMMA_KEY")
 
 #Create Google AI Studio model
@@ -52,18 +52,6 @@ def get_lesson(lesson_name: int) -> str:
         lesson = file.read()
 
     return lesson
-
-@tool
-def get_presentation_script(lesson_name: int) -> str:
-    """Get the PDF presentation for a lesson to use as context to turn into a script for a video. DO NOT USE if user does not specify to.
-    
-    Args:
-        lesson_name: the name of the lesson"""
-    
-    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf", "rb") as file:
-        presentation = file.read()
-
-    return universal_agent.invoke({"messages": [{"role": "user", "content": f"Please summarize the following presentation into a script for a video. The length of the script should be around 15 minutes:\n{presentation}"}]})["messages"][1].content[0]["text"]
 
 @tool
 def gen_audio(lesson_name: int) -> str:
@@ -244,6 +232,48 @@ def gen_presentation(lesson_name: int, context: str) -> str:
         x += 1
         timeout += 5
 
+#Generates video using remotion and TypeScript react.
+@tool
+def gen_video(lesson_name: int) -> str:
+    """Use Remotion to generate a video using the provided context. DO NOT USE if user does not specify to.
+    
+    Args:
+        lesson_name: The name of the lesson.
+        context: A parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
+
+    print("Entered video generation!")
+
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_audio.mp3", "rb") as file:
+        myAudio = file.read()
+
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf", "rb") as file:
+        myPres = file.read()
+
+    os.chdir(f"deliverables/lesson {lesson_name}")
+    subprocess.run(["npx.cmd", "-y", f"create-video@latest", "--yes", "--blank", f"video-lesson{lesson_name}"])
+    os.chdir(f"./video-lesson{lesson_name}")
+    subprocess.run(["npm.cmd", "i"])
+    subprocess.run(["npx.cmd", "remotion", "skiills", "add"])
+    subprocess.run(["npm.cmd", "approve-scripts", "esbuild@0.28.1"])
+    subprocess.run(["npm.cmd", "i", "--save-exact", "@remotion/transitions@4.0.490"])
+
+    os.chdir("./public")
+
+    with open(f"./lesson {lesson_name}_audio.mp3", "wb") as file:
+        file.write(myAudio)
+
+    with open(f"./lesson {lesson_name}_presentation.pdf", "wb") as file:
+        file.write(myPres)
+
+    os.chdir("../")
+
+    subprocess.run([
+        "opencode.cmd", 
+        "run", 
+        f"'Use Remotion best practices skill. Create a 20 to-minute video about lesson {lesson_name}. Use the presentation and audio files found in the public folder to help create the video. Make the video look visually appealing. Use transitions to go from slide to slide. DO NOT STOP until the video is completely generated. You MUST use the audio found in the public folder. If you do output the video, name it using this format: Lesson (lesson number)_video.mp4. DO NOT ALLOW each part of the audio file to overlap with each part of the video. Make sure each transition aligns with the next part of the audio.'"])
+
+    return "Video Generated!"
+
 #Read markdown file for system prompt
 with open("system_prompts/lesson_workflow.md", "r", encoding="utf-8") as file:
     lesson_prompt = file.read()
@@ -288,11 +318,11 @@ google_syllabus_agent = create_agent(
 #Create Universal Agent for the course.
 universal_agent = create_agent(
     model=google_unverisal_model,
-    tools=[get_lesson, gen_lesson, gen_quiz, gen_assignment, gen_presentation, gen_audio], #Tool for generating HTML lessons
+    tools=[get_lesson, gen_lesson, gen_quiz, gen_assignment, gen_presentation, gen_audio, gen_video], #Tool for generating HTML lessons
     system_prompt=universal_prompt #Instructions for the agent on how to create the desired deliverables from the user.
 )
 
 user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment)")
 
-universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE."}]})
+universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE. ALWAYS use one tool at a time."}]})
 print("Deliverable Completed!")
