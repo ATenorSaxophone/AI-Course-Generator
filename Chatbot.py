@@ -15,16 +15,13 @@ from langchain_community.tools import DuckDuckGoSearchRun
 from google import genai
 from openai import OpenAI
 
-# from TTS.api import TTS
-
 # Get .env variables
 load_dotenv()
-google_key = os.getenv("MY_GOOGLE_KEY")
-GammaAPI_KEY = os.getenv("MY_GAMMA_KEY")
+GammaAPI_KEY=os.getenv("MY_GAMMA_KEY")
 
 #Create Google AI Studio model
 google_gemini_model = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.6-flash",
     api_key=os.environ["MY_GOOGLE_KEY"],
     temperature=0.1
 )
@@ -32,6 +29,24 @@ google_gemini_model = ChatGoogleGenerativeAI(
 google_unverisal_model = ChatGoogleGenerativeAI(
     model="gemini-3.1-flash-lite",
     api_key=os.environ["MY_GOOGLE_KEY"],
+    temperature=0.1
+)
+
+google_gemini_lesson_model = ChatGoogleGenerativeAI(
+    model="gemini-3.6-flash",
+    api_key=os.environ["MY_GOOGLE_KEY_LESSONS"],
+    temperature=0.1
+)
+
+google_gemini_quizzes_model = ChatGoogleGenerativeAI(
+    model="gemini-3.6-flash",
+    api_key=os.environ["MY_GOOGLE_KEY_QUIZZES"],
+    temperature=0.1
+)
+
+google_gemini_assignment_model = ChatGoogleGenerativeAI(
+    model="gemini-3.6-flash",
+    api_key=os.environ["MY_GOOGLE_KEY_ASSIGNMENTS"],
     temperature=0.1
 )
 
@@ -61,12 +76,12 @@ def gen_audio(lesson_name: int) -> str:
         lesson_name: The name of the lesson"""
     
     print("entered audio tool!")
-    upload = genai.Client(api_key=os.environ["MY_GOOGLE_KEY"])
+    upload = genai.Client(api_key=os.environ["MY_GOOGLE_KEY_AUDIOS"])
 
     myfile = upload.files.upload(file=f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf")
 
     script = upload.interactions.create(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         input=[
             {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio and no more than 30 minutes of audio. The final output should only include letters and punctuation (periods, commas, apostrophe, etc.). The final output should not include characters like asterisks."},
             {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
@@ -75,6 +90,7 @@ def gen_audio(lesson_name: int) -> str:
 
     upload.files.delete(name=myfile.name)
 
+    print("Reached Audio Generation!")
     generation = OpenAI(
         base_url="http://localhost:8880/v1", api_key="not-needed"
     )
@@ -88,10 +104,12 @@ def gen_audio(lesson_name: int) -> str:
         folder_path.mkdir(parents=True, exist_ok=True)
         response.stream_to_file(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_audio.mp3")
 
+    print("Audio Done!")
+
 # Tools for generating lessons, assignments, and quizzes.
 @tool
 def gen_lesson(prompt: str, lesson_name: int) -> str:
-    """Use Google Gemini to generate a Lesson document in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
+    """Use Google Gemini to generate a Lesson document/lesson readings in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
@@ -114,7 +132,7 @@ def gen_lesson(prompt: str, lesson_name: int) -> str:
 
 @tool
 def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
-    """Use Google Gemini to generate a Quiz document in HTML using the provided template within the system prompt. This tool should run if user answers Yes/Y to Context Preference. DO NOT USE if user does not specify to.
+    """Use Google Gemini to generate a Quiz document in HTML using the provided template within the system prompt. Use get_lesson tool unless user does not specify too. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
@@ -122,7 +140,7 @@ def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
         context: An OPTIONAL parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
     
     print("entered quiz tool!")
-    quiz_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
+    quiz_output = google_quiz_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
 
     folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
@@ -137,7 +155,7 @@ def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
 
 @tool
 def gen_assignment(prompt: str, lesson_name: int, context: str=None) -> str:
-    """Use Google Gemini to generate a Assignment document in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
+    """Use Google Gemini to generate a Assignment document in HTML using the provided template within the system prompt. Use get_lesson tool unless user does not specify too. DO NOT USE if user does not specify to.
     
     Args:
         prompt: Instructions user provide for what the Agent must generate
@@ -145,7 +163,7 @@ def gen_assignment(prompt: str, lesson_name: int, context: str=None) -> str:
         context: An OPTIONAL parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
 
     print("entered assignment tool!")
-    assignment_output = google_quiz_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
+    assignment_output = google_assignment_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext: {context}"}]})
 
     folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
@@ -235,43 +253,37 @@ def gen_presentation(lesson_name: int, context: str) -> str:
 #Generates video using remotion and TypeScript react.
 @tool
 def gen_video(lesson_name: int) -> str:
-    """Use Remotion to generate a video using the provided context. DO NOT USE if user does not specify to.
+    """Use Remotion to generate a video using the provided context. DO NOT USE if user does not specify to. Let the AI render the video as .mp4 files. DO NOT USE the presentation.pdf files to help generate the video.
     
     Args:
-        lesson_name: The name of the lesson.
-        context: A parameter that is referenced upon to determine generation content. Context will come from the get_lesson tool and should be the exact same as what the output is from get_lesson tool."""
-
+        lesson_name: The name of the lesson."""
     print("Entered video generation!")
 
     with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_audio.mp3", "rb") as file:
         myAudio = file.read()
-
-    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf", "rb") as file:
-        myPres = file.read()
 
     os.chdir(f"deliverables/lesson {lesson_name}")
     subprocess.run(["npx.cmd", "-y", f"create-video@latest", "--yes", "--blank", f"video-lesson{lesson_name}"])
     os.chdir(f"./video-lesson{lesson_name}")
     subprocess.run(["npm.cmd", "i"])
     subprocess.run(["npx.cmd", "remotion", "skiills", "add"])
-    subprocess.run(["npm.cmd", "approve-scripts", "esbuild@0.28.1"])
-    subprocess.run(["npm.cmd", "i", "--save-exact", "@remotion/transitions@4.0.490"])
+    subprocess.run(["npm.cmd", "i", "--save-exact", "@remotion/transitions@4.0.497"])
+    subprocess.run(["npm.cmd", "approve-scripts", "esbuild"])
 
     os.chdir("./public")
 
     with open(f"./lesson {lesson_name}_audio.mp3", "wb") as file:
         file.write(myAudio)
 
-    with open(f"./lesson {lesson_name}_presentation.pdf", "wb") as file:
-        file.write(myPres)
-
     os.chdir("../")
 
-    subprocess.run([
+    time.sleep(1)
+    results = subprocess.run([
         "opencode.cmd", 
         "run", 
-        f"'Use Remotion best practices skill. Create a 20 to-minute video about lesson {lesson_name}. Use the presentation and audio files found in the public folder to help create the video. Make the video look visually appealing. Use transitions to go from slide to slide. DO NOT STOP until the video is completely generated. You MUST use the audio found in the public folder. If you do output the video, name it using this format: Lesson (lesson number)_video.mp4. DO NOT ALLOW each part of the audio file to overlap with each part of the video. Make sure each transition aligns with the next part of the audio.'"])
+        f"Use Remotion best practices skill. Create a 20 to 30-minute video about lesson {lesson_name}. Make the video look visually appealing. Use transitions to go from slide to slide. DO NOT STOP until the video is completely generated and rendered. You MUST use the audio found in the public folder. If you do output the video, name it using this format: Lesson (lesson number)_video.mp4. Make sure the video aligns with the audio. Make sure each transition aligns with the next part of the audio. Render the video to a .mp4 file."])
 
+    os.chdir("../../../")
     return "Video Generated!"
 
 #Read markdown file for system prompt
@@ -296,16 +308,23 @@ with open("system_prompts/universal_workflow.md", "r", encoding="utf-8") as file
 
 #Create google lesson agent
 google_lesson_agent = create_agent(
-    model=google_gemini_model,   #Google Gemini model
+    model=google_gemini_lesson_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=lesson_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
-#Create google quiz and assignmentagent
-google_quiz_assignment_agent = create_agent(
-    model=google_gemini_model,   #Google Gemini model
+#Create google quiz agent for the course
+google_quiz_agent = create_agent(
+    model=google_gemini_quizzes_model,   #Google Gemini model
     tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=quiz_assignment_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
+)
+
+#Create google assignment agent for the course.
+google_assignment_agent = create_agent(
+    model=google_gemini_assignment_model,
+    tools=[search_tool],
+    system_prompt=quiz_assignment_prompt
 )
 
 #Create syllabus agent for the course.
@@ -324,5 +343,5 @@ universal_agent = create_agent(
 
 user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment)")
 
-universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: Only use each NECESSARY tool ONCE. ALWAYS use one tool at a time."}]})
+universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: ALWAYS use one tool at a time. If user asks to generate audio and/or video, the Get lesson tool does not need to be used. For quiz, assignment, and presentation tools, always use get lesson tool beforehand."}]})
 print("Deliverable Completed!")
