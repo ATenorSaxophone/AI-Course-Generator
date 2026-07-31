@@ -1,0 +1,20 @@
+# AI Frameworks & Orchestration
+langchain==1.3.7
+langgraph==1.2.4
+langsmith==0.8.14
+
+# Model Providers
+openai==2.44.0
+google-genai==2.8.0
+langchain-google-genai==4.2.5
+
+# Text-to-Speech & Audio
+coqui-tts==0.27.5
+coqui-tts-trainer==0.3.3
+librosa==0.11.0
+
+# Document & Search Utilities
+duckduckgo_search==8.1.1
+pymupdf==1.28.0
+pypdf==6.14.2
+python-dotenv==1.2.2
