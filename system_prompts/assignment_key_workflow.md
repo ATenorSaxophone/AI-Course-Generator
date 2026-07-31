@@ -195,3 +195,214 @@ Quality Standards:
 - Do not mention AI or how the solution was generated.
 
 Output only the completed instructor answer key.
+
+# Template for assignment answer key:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Key: Lesson 1 Quiz - Foundations of HCI</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --background-color: #f7fafc;
+            --card-background: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --accent-color: #2f855a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-background);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .answer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .answer-item {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            background-color: #fff;
+            transition: border-color 0.2s ease;
+        }
+
+        .answer-item:hover {
+            border-color: var(--secondary-color);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .correct-answer {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .explanation {
+            font-size: 0.95rem;
+            color: #4a5568;
+            background-color: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 0 4px 4px 0;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #a0aec0;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="subtitle">Human-Computer Interaction (HCI) Coursework</div>
+        <h1>Answer Key: Lesson 1 Quiz</h1>
+        <p><strong>Topic:</strong> Foundations of Human-Computer Interaction</p>
+    </header>
+
+    <main>
+        <ol class="answer-list">
+            <li class="answer-item">
+                <div class="question-number">Question 1</div>
+                <div class="correct-answer">Answer: B. Human-Computer Interaction</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> HCI stands for Human-Computer Interaction, an interdisciplinary field focusing on the design of computer technology and the interaction between humans and computers.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 2</div>
+                <div class="correct-answer">Answer: A. The extent to which a product can be used by specified users to achieve specified goals with effectiveness, efficiency, and satisfaction.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> ISO 9241-11 defines usability through effectiveness, efficiency, and satisfaction within a specified context of use.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 3</div>
+                <div class="correct-answer">Answer: C. The perceived and actual properties of an object that determine how it can be used.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> As articulated by Don Norman, affordances provide strong clues to the operation of things (e.g., a handle affords pulling).
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 4</div>
+                <div class="correct-answer">Answer: B. A user's internal psychological representation of how a system works.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> A mental model is built from past experiences and intuitive expectations, influencing how users interact with a system.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 5</div>
+                <div class="correct-answer">Answer: B. Don Norman</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> Don Norman authored the landmark book <em>The Design of Everyday Things</em>, establishing core concepts like affordances, signifiers, and feedback.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 6</div>
+                <div class="correct-answer">Answer: B. It informs users about what action has been performed and what the result is.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> Feedback sends information back to the user about what action was accomplished, confirming progress and reducing uncertainty.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 7</div>
+                <div class="correct-answer">Answer: D. An iterative process focusing on user needs, behaviors, and feedback throughout development.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> User-Centered Design (UCD) relies on early and continuous engagement with end-users through research, prototyping, testing, and refinement.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 8</div>
+                <div class="correct-answer">Answer: A. UX encompasses the overall feeling and experience of the user, while UI focuses on the specific graphical/visual layout and elements.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> UI covers visual and interactive components (buttons, typography, layout), whereas UX covers the end-to-end journey and user satisfaction.
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 9</div>
+                <div class="correct-answer">Answer: B. An inspection method where usability experts evaluate an interface against established design principles.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> Heuristic evaluation involves experts systematically evaluating an interface against recognized usability guidelines (e.g., Nielsen’s 10 Usability Heuristics).
+                </div>
+            </li>
+
+            <li class="answer-item">
+                <div class="question-number">Question 10</div>
+                <div class="correct-answer">Answer: A. The gap between the user's operational goal and the system actions required to execute it.</div>
+                <div class="explanation">
+                    <strong>Explanation:</strong> The Gulf of Execution reflects how easily a user can discover and execute the physical controls needed to perform an intended task.
+                </div>
+            </li>
+        </ol>
+    </main>
+
+    <footer>
+        <p>Department of Computer Science & Educational Instructional Design &copy; Course Material</p>
+    </footer>
+</div>
+
+</body>
+</html>
+```
