@@ -39,7 +39,7 @@ Before running the project, make sure you have the following installed and avail
 ## 1. Clone and open the repository
 
 ```powershell
-git clone https://github.com/ATenorSaxophone/HCDD-Course-Generator
+git clone https://github.com/ATenorSaxophone/AI-Course-Generator
 cd "AI Canvas Course Generator"
 ```
 
