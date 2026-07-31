@@ -461,7 +461,7 @@ time.sleep(10)
 
 while chatting:
     #Instructions for the user to provide.
-    user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment, etc.). Type 'STOP' to stop.")
+    user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment, etc.). Type 'STOP' to stop. ")
 
     if user_prompt == "STOP":
         chatting = False
@@ -469,6 +469,6 @@ while chatting:
     else:
         #Takes user input and executes commands.
         universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: ALWAYS use one tool at a time. If user asks to generate audio and/or video, the Get lesson tool does not need to be used. For quiz, assignment, and presentation tools, always use get lesson tool beforehand."}]})
-        time.sleep(60)
+        print("Instructions completed! Take 10 seconds to avoid rate limits.")
+        time.sleep(10)
 container.stop()
-print("Deliverable Completed!")
