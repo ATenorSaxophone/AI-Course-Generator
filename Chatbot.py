@@ -407,42 +407,36 @@ with open("system_prompts/universal_workflow.md", "r", encoding="utf-8") as file
 #Create google lesson agent
 google_lesson_agent = create_agent(
     model=google_gemini_lesson_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=lesson_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create google quiz agent for the course
 google_quiz_agent = create_agent(
     model=google_gemini_quizzes_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=quiz_assignment_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create google answer key agent for the course.
 google_quiz_key_agent= create_agent(
     model=google_gemini_quiz_key_model,
-    tools=[search_tool],
     system_prompt=ans_key_prompt
 )
 
 #Create google assignment agent for the course.
 google_assignment_agent = create_agent(
     model=google_gemini_assignment_model,
-    tools=[search_tool],
     system_prompt=quiz_assignment_prompt
 )
 
 #Create google assignment key agent for the course
 google_assignment_key_agent = create_agent(
     model=google_assignment_key_model,
-    tools=[search_tool],
     system_prompt=assignment_key_prompt
 )
 
 #Create syllabus agent for the course.
 google_syllabus_agent = create_agent(
     model=google_gemini_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
