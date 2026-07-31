@@ -1,1 +1,9 @@
 .env
+/deliverables/
+/kokoro/
+/node_modules/
+package.json
+package-lock.json
+skills-lock.json
+/generator/
+/.agents/
