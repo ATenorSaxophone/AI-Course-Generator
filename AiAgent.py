@@ -136,7 +136,7 @@ container = client.containers.get("kokoro-tts-cpu")
 container.start()
 time.sleep(10)
 
-for lesson_name in range(17,17):
+for lesson_name in range(1,17):
 
     curr_lesson = user_prompts[f"lesson {lesson_name}"]
 
