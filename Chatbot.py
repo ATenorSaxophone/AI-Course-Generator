@@ -60,7 +60,7 @@ google_gemini_assignment_model = ChatGoogleGenerativeAI(
 
 google_assignment_key_model = ChatGoogleGenerativeAI(
     model="gemini-3.6-flash",
-    api_key=os.environ["MY_GOOGLE_KEY_ASSIGNMENT_KEY"],
+    api_key=os.environ["MY_GOOGLE_KEY_ASSIGNMENTS_KEY"],
     temperature=0.7
 )
 
@@ -201,7 +201,7 @@ def gen_ans_key(prompt: str, lesson_name: int, context: str) -> str:
     context: A parameter that is referenced upon to generate context. Context will come from the get_quiz tool and should be the exact same as what the output is from get_quiz tool."""
 
     print("entered answer key tool!")
-    ans_key_output = google_ans_key_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext:{context}"}]})
+    ans_key_output = google_quiz_key_agent.invoke({"messages": [{"role": "user", "content": f"Lesson Num: {lesson_name}\nPrompt: {prompt}\nContext:{context}"}]})
 
     folder_path = Path(f"deliverables/lesson {lesson_name}")
     folder_path.mkdir(parents=True, exist_ok=True)
