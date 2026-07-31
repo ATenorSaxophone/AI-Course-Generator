@@ -17,6 +17,9 @@ from openai import OpenAI
 
 import docker
 
+#Variable to keep chatbot running.
+chatting = True
+
 # Get .env variables
 load_dotenv()
 GammaAPI_KEY=os.getenv("MY_GAMMA_KEY")
@@ -68,6 +71,8 @@ google_assignment_key_model = ChatGoogleGenerativeAI(
 search_tool = DuckDuckGoSearchRun()
 
 # Tools for getting context for prompts.
+
+#Gets lesson to use as context for generations.
 @tool
 def get_lesson(lesson_name: int) -> str:
     """Get a HTML lesson page to use as context for a prompt to generate quizzes or assignments. This tool will NEVER use the get_assignment and get_quiz tools.
@@ -82,6 +87,7 @@ def get_lesson(lesson_name: int) -> str:
 
     return lesson
 
+#Gets quizzes to use as context for generations.
 @tool
 def get_quiz(lesson_name: int) -> str:
     """Get a HTML quiz page to use as context for a prompt to genereate quiz answer key. This tool will NEVER use the get_lesson and get_assignment tools.
@@ -96,6 +102,7 @@ def get_quiz(lesson_name: int) -> str:
 
     return quiz
 
+#Gets assignment to use as context for generations.
 @tool
 def get_assignment(lesson_name: int) -> str:
     """Get a HTML assignment page to use as context for a prompt to generate assignment answer key. This tool will never use the get_lesson and get quiz tools.
@@ -110,6 +117,9 @@ def get_assignment(lesson_name: int) -> str:
 
     return assignment
 
+# Tools for generating deliverables.
+
+#Generates audio to be used for 
 @tool
 def gen_audio(lesson_name: int) -> str:
     """Use TTS to generate an audio file from a script for a video. DO NOT USE if user does not specify to.
@@ -118,30 +128,30 @@ def gen_audio(lesson_name: int) -> str:
         lesson_name: The name of the lesson"""
     
     print("entered audio tool!")
-    upload = genai.Client(api_key=os.environ["MY_GOOGLE_KEY_AUDIOS"])
 
-    myfile = upload.files.upload(file=f"deliverables/lesson {lesson_name}/lesson {lesson_name}_presentation.pdf")
-
+    #Generates scripts for Text-to-Speech
     print("Started audio script generation!")
-    script = upload.interactions.create(
-        model="gemini-3.6-flash",
-        input=[
-            {"type": "text", "text": "Create an audio prompt of the following presentation. Do not provide instructions, only words that are to be spoken. Try to make the script long enough to cover 20 minutes of audio and no more than 30 minutes of audio. The final output should only include letters and punctuation (periods, commas, apostrophe, etc.). The final output should not include characters like asterisks."},
-            {"type": "document", "uri": myfile.uri, "mime_type": myfile.mime_type}
-        ]
-    )
+    subprocess.run([
+        "opencode.cmd",
+        "run",
+        f"Create a script called 'lesson {lesson_name}_Script.txt' that covers the lesson html page. The script should not include extra characters such as asterisks. The script should be able to allow an text-to-speech generator to turn it into a 20 to 30 minute audio ,mp3 file. The txt file should be created within the folder the directory is currently in. You can only end once you are sure the .txt file has been created."
+    ])
 
-    upload.files.delete(name=myfile.name)
+    #Gets and reads script from file explorer
+    script = ""
+    with open(f"./lesson {lesson_name}_Script.txt", "r", encoding="utf-8") as file:
+        script = file.read()
 
     print("Reached Audio Generation!")
     generation = OpenAI(
         base_url="http://localhost:8880/v1", api_key="not-needed"
     )
 
+    #Uses Text-to-Speech to create audio
     with generation.audio.speech.with_streaming_response.create(
         model="kokoro",
         voice="af_sky+af_bella", #single or multiple voicepack combo
-        input= script.output_text
+        input= script
         ) as response:
         folder_path = Path(f"deliverables/lesson {lesson_name}")
         folder_path.mkdir(parents=True, exist_ok=True)
@@ -149,7 +159,7 @@ def gen_audio(lesson_name: int) -> str:
 
     print("Audio Done!")
 
-# Tools for generating lessons, assignments, and quizzes.
+#Generates lessons based on the topics the user gives.
 @tool
 def gen_lesson(prompt: str, lesson_name: int) -> str:
     """Use Google Gemini to generate a Lesson document/lesson readings in HTML using the provided template within the system prompt. DO NOT USE if user does not specify to.
@@ -170,7 +180,7 @@ def gen_lesson(prompt: str, lesson_name: int) -> str:
 
     return f"Finished Lesson {lesson_name} Generation!\n60 Seconds will be taken to avoid hitting rate limits..."
 
-
+#Generates quizzes from previously generated lessons
 @tool
 def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
     """Use Google Gemini to generate a Quiz document in HTML using the provided template within the system prompt. Use get_lesson tool unless user does not specify too. DO NOT USE if user does not specify to. DO NOT use the get_quiz tool as context for quiz generation. DO NOT generate an answer key on the same HTML page.
@@ -191,6 +201,7 @@ def gen_quiz(prompt: str, lesson_name: int, context: str=None) -> str:
 
     return f"Finished Quiz {lesson_name} Generation!\n"
 
+#Generates answer keys for previously generated quizzes
 @tool
 def gen_ans_key(prompt: str, lesson_name: int, context: str) -> str:
     """Use Google Gemini to generate a quiz answer key using the provided context. Use the get_quiz tool to get context. DO NOT USE if user does not specify to.
@@ -211,6 +222,7 @@ def gen_ans_key(prompt: str, lesson_name: int, context: str) -> str:
 
     return f"Finished answer key {lesson_name} Generation"
 
+#Generates assignments based on the current lesson and instructions provided.
 @tool
 def gen_assignment(prompt: str, lesson_name: int, context: str=None) -> str:
     """Use Google Gemini to generate a Assignment document in HTML using the provided template within the system prompt. Use get_lesson tool unless user does not specify too. DO NOT USE if user does not specify to.
@@ -230,6 +242,7 @@ def gen_assignment(prompt: str, lesson_name: int, context: str=None) -> str:
         file.write(assignment_output["messages"][1].content[0]["text"])
     return f"Assignment {lesson_name} generated!"
 
+#Generates an answer key for a previously generated assignment.
 @tool
 def gen_assignment_key(prompt: str, lesson_name: int, context: str) -> str:
     """Use Google Gemini to generate an assignment answer key in HTML. Use the get_assignment tool unless the user specifies not to. DO NOT USE if user does not specify to.
@@ -248,7 +261,8 @@ def gen_assignment_key(prompt: str, lesson_name: int, context: str) -> str:
     with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_assignment_key.html", "w", encoding="utf-8") as file:
         file.write(assignment_key_output["messages"][1].content[0]["text"])
     return f"Assignment answer key {lesson_name} generated!"
-    
+
+#Generates a presentation for the lesson.
 @tool
 def gen_presentation(lesson_name: int, context: str) -> str:
     """Use Gamma AI to generated presentations in a .pdf file. The AI should use the get_lesson tool to get the context needed to generate the presentations. DO NOT USE if user does not specify to.
@@ -418,6 +432,7 @@ google_assignment_agent = create_agent(
     system_prompt=quiz_assignment_prompt
 )
 
+#Create google assignment key agent for the course
 google_assignment_key_agent = create_agent(
     model=google_assignment_key_model,
     tools=[search_tool],
@@ -431,21 +446,29 @@ google_syllabus_agent = create_agent(
     system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
-#Create Universal Agent for the course.
+#Create Universal Agent for the course. This will be the AI used to chat with the user.
 universal_agent = create_agent(
     model=google_unverisal_model,
     tools=[get_lesson, get_quiz, get_assignment, gen_lesson, gen_quiz, gen_ans_key, gen_assignment, gen_assignment_key, gen_presentation, gen_audio, gen_video], #Tool for generating HTML lessons
     system_prompt=universal_prompt #Instructions for the agent on how to create the desired deliverables from the user.
 )
 
+#Starts Kokoro TTS
 client = docker.from_env()
 container = client.containers.get("kokoro-tts-cpu")
 container.start()
 time.sleep(10)
 
-user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment)")
+while chatting:
+    #Instructions for the user to provide.
+    user_prompt = input("What deliverable do you want to generate? (Lesson, Presentation, Video, Quiz, Assignment, etc.). Type 'STOP' to stop.")
 
-universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: ALWAYS use one tool at a time. If user asks to generate audio and/or video, the Get lesson tool does not need to be used. For quiz, assignment, and presentation tools, always use get lesson tool beforehand."}]})
-time.sleep(60)
+    if user_prompt == "STOP":
+        chatting = False
+
+    else:
+        #Takes user input and executes commands.
+        universal_output = universal_agent.invoke({"messages": [{"role": "user", "content":f"User Prompt: {user_prompt}\nAdditional Instructions: ALWAYS use one tool at a time. If user asks to generate audio and/or video, the Get lesson tool does not need to be used. For quiz, assignment, and presentation tools, always use get lesson tool beforehand."}]})
+        time.sleep(60)
 container.stop()
 print("Deliverable Completed!")
