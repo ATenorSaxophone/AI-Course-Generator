@@ -134,12 +134,12 @@ def gen_audio(lesson_name: int) -> str:
     subprocess.run([
         "opencode.cmd",
         "run",
-        f"Create a script called 'lesson {lesson_name}_Script.txt' that covers the lesson html page. The script should not include extra characters such as asterisks. The script should be able to allow an text-to-speech generator to turn it into a 20 to 30 minute audio ,mp3 file. The txt file should be created within the folder the directory is currently in. You can only end once you are sure the .txt file has been created."
+        f"Create a script called 'lesson {lesson_name}_Script.txt' that covers the lesson html page. The script should not include extra characters such as asterisks. The script should be able to allow an text-to-speech generator to turn it into a 20 to 30 minute audio ,mp3 file. The txt file should be created within the folder the directory is currently in. You can only end once you are sure the .txt file has been created. Place the script within the right lesson folder found within the deliverables folder."
     ])
 
     #Gets and reads script from file explorer
     script = ""
-    with open(f"./lesson {lesson_name}_Script.txt", "r", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_Script.txt", "r", encoding="utf-8") as file:
         script = file.read()
 
     print("Reached Audio Generation!")
