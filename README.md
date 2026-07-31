@@ -56,10 +56,22 @@ py -3.11 -m venv .venv
 pip install -r requirements.txt
 ```
 
-## 4. Install Node dependencies
+## 4. Install Node.js and OpenCode globally.
+
+On Windows, install Node.js 20+ globally first, then install the OpenCode CLI so the scripts can find `opencode.cmd`.
+
+Link: [Node.js](https://nodejs.org/en)
 
 ```powershell
-npm install
+node --version
+npm --version
+```
+
+If you are installing OpenCode through npm, run:
+
+```powershell
+npm install -g opencode-ai
+opencode --version
 ```
 
 ## 5. Create a `.env` file
