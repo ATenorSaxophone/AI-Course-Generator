@@ -2,6 +2,7 @@
 langchain==1.3.7
 langgraph==1.2.4
 langsmith==0.8.14
+docker==7.2.0
 
 # Model Providers
 openai==2.44.0

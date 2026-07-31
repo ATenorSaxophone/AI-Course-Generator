@@ -39,8 +39,8 @@ Before running the project, make sure you have the following installed and avail
 ## 1. Clone and open the repository
 
 ```powershell
-git clone <your-repo-url>
-cd "AI Canvas Course Generator"
+git clone https://github.com/ATenorSaxophone/AI-Course-Generator
+cd "AI-Course-Generator"
 ```
 
 ## 2. Create a Python virtual environment

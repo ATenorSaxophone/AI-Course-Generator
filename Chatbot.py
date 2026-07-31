@@ -134,12 +134,12 @@ def gen_audio(lesson_name: int) -> str:
     subprocess.run([
         "opencode.cmd",
         "run",
-        f"Create a script called 'lesson {lesson_name}_Script.txt' that covers the lesson html page. The script should not include extra characters such as asterisks. The script should be able to allow an text-to-speech generator to turn it into a 20 to 30 minute audio ,mp3 file. The txt file should be created within the folder the directory is currently in. You can only end once you are sure the .txt file has been created."
+        f"Create a script called 'lesson {lesson_name}_Script.txt' that covers the lesson html page. The script should not include extra characters such as asterisks. The script should be able to allow an text-to-speech generator to turn it into a 20 to 30 minute audio ,mp3 file. The txt file should be created within the folder the directory is currently in. You can only end once you are sure the .txt file has been created. Place the script within the right lesson folder found within the deliverables folder."
     ])
 
     #Gets and reads script from file explorer
     script = ""
-    with open(f"./lesson {lesson_name}_Script.txt", "r", encoding="utf-8") as file:
+    with open(f"deliverables/lesson {lesson_name}/lesson {lesson_name}_Script.txt", "r", encoding="utf-8") as file:
         script = file.read()
 
     print("Reached Audio Generation!")
@@ -407,42 +407,36 @@ with open("system_prompts/universal_workflow.md", "r", encoding="utf-8") as file
 #Create google lesson agent
 google_lesson_agent = create_agent(
     model=google_gemini_lesson_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=lesson_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create google quiz agent for the course
 google_quiz_agent = create_agent(
     model=google_gemini_quizzes_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=quiz_assignment_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
 #Create google answer key agent for the course.
 google_quiz_key_agent= create_agent(
     model=google_gemini_quiz_key_model,
-    tools=[search_tool],
     system_prompt=ans_key_prompt
 )
 
 #Create google assignment agent for the course.
 google_assignment_agent = create_agent(
     model=google_gemini_assignment_model,
-    tools=[search_tool],
     system_prompt=quiz_assignment_prompt
 )
 
 #Create google assignment key agent for the course
 google_assignment_key_agent = create_agent(
     model=google_assignment_key_model,
-    tools=[search_tool],
     system_prompt=assignment_key_prompt
 )
 
 #Create syllabus agent for the course.
 google_syllabus_agent = create_agent(
     model=google_gemini_model,   #Google Gemini model
-    tools=[search_tool],    #Search tool for gathering dynamic information
     system_prompt=syllabus_prompt     #Instructions for the agent on how to create the Canvas Class and Canvas components.
 )
 
